@@ -1,21 +1,17 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
+import "dart:ui" as ui;
 
 import 'package:another_brother/custom_paper.dart';
 import 'package:another_brother/label_info.dart';
 import 'package:another_brother/printer_info.dart';
 import 'package:another_brother/type_b_commands.dart';
 import 'package:another_brother/type_b_printer.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import "dart:ui" as ui;
-import 'dart:async';
-
 import 'package:flutter/services.dart';
-import 'package:another_brother/another_brother.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 //import 'package:flutter_scan_bluetooth/flutter_scan_bluetooth.dart';
 // To add platforms, run `flutter create -t plugin --platforms <platforms> .` under another_brother.
@@ -64,14 +60,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<PrinterStatus> printLabelTypeB() async {
-
     TbPrinterInfo printerInfo = TbPrinterInfo(
       printerModel: TbModel.RJ_3035B,
-        port: Port.BLUETOOTH,
-        //port: Port.USB,
+      port: Port.BLUETOOTH,
+      //port: Port.USB,
       //btAddress: "34:81:F4:9A:5A:EC"
     );
-
 
     //TbPrinterInfo printerInfo =
     //    TbPrinterInfo(port: Port.NET, ipAddress: "10.0.0.35");
@@ -86,7 +80,8 @@ class _MyAppState extends State<MyApp> {
 
     //var printersFound = await printer.getBLEPrinters();
     //print ("Found LE Printers: $printersFound");
-    var printerFound = await printer.getBluetoothPrinters([TbModel.RJ_3035B.getName()]);
+    var printerFound =
+        await printer.getBluetoothPrinters([TbModel.RJ_3035B.getName()]);
     print("Found Printers: $printerFound");
 
     printerInfo.btAddress = printerFound.single.macAddress;
@@ -109,10 +104,10 @@ class _MyAppState extends State<MyApp> {
     //print ("TypeB: Download BMP Success? $success");
 
     success = await printer.setup();
-    print ("TypeB: Print Setup Success? $success");
+    print("TypeB: Print Setup Success? $success");
 
     success = await printer.clearBuffer();
-    print ("TypeB: Clear Buffer Success? $success");
+    print("TypeB: Clear Buffer Success? $success");
 
     //success = await printer.barcode("1234567");
     //print ("TypeB: Barcode Success? $success");
@@ -130,9 +125,10 @@ class _MyAppState extends State<MyApp> {
 
     //var assetImage = await loadImage("assets/brother_hack.png");
     //success = await printer.downloadImage(assetImage, scale: 0.6);
-    success = await printer.downloadImageAsset("assets/brother_hack.png", x: 10, y:10, scale: 0.6);
+    success = await printer.downloadImageAsset("assets/brother_hack.png",
+        x: 10, y: 10, scale: 0.6);
     //success = await printer.downloadImageAsset("assets/LOGO.BMP", scale: 1, printerDpi: 95);
-    print ("TypeB: Image Download Success? $success");
+    print("TypeB: Image Download Success? $success");
 
     //var grayImage = await printer.downloadImageAsset("assets/brother_hack.png", scale: 0.2);
     //_imageBytes = (await grayImage.toByteData(format: ImageByteFormat.rawUnmodified)).buffer.asUint8List();
@@ -162,21 +158,20 @@ class _MyAppState extends State<MyApp> {
     //print("TypeB: WLAN Test Command Success? $success");
 
     success = await printer.printLabel();
-    print ("TypeB: Print Success? $success");
+    print("TypeB: Print Success? $success");
 
     TbPrinterStatus printerStatus = await printer.printerStatus();
-    print ("TypeB: Printer Status? ${printerStatus.getStatusValue()}");
+    print("TypeB: Printer Status? ${printerStatus.getStatusValue()}");
 
     // Delete all files downloaded to the printer memory
     success = await printer.sendTbCommand(TbCommandDeleteFile());
-    print ("TypeB: Delete delete Success? $success");
+    print("TypeB: Delete delete Success? $success");
 
     //bool fileSent = await printer.updateFirmAsset("assets/RJ-3035B_EZC_B1.00.Q38.NEW");
     //print("File Sent: $fileSent");
 
     success = await printer.endCommunication(timeoutMillis: 50000);
     print("TypeB: Connection Closed? $success");
-
   }
 
   Future<ui.Image> loadImage(String assetPath) async {
@@ -540,7 +535,7 @@ class _MyAppState extends State<MyApp> {
     printInfo.macAddress = netPrinters.single.macAddress;
 */
     List<NetPrinter> netPrinters =
-    await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
+        await printer.getNetPrinters([Model.QL_1110NWB.getName()]);
     print("Net Printers Found: $netPrinters");
     printInfo.ipAddress = netPrinters.single.ipAddress;
 
@@ -578,25 +573,22 @@ class _MyAppState extends State<MyApp> {
 */
 
     TextStyle style = TextStyle(
-        color: Colors.black,
-        fontSize: 30,
-        fontWeight: FontWeight.bold
-    );
+        color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold);
 
-    ui.ParagraphBuilder paragraphBuilder = ui.ParagraphBuilder(
-        ui.ParagraphStyle(
-          fontSize:   style.fontSize,
-          fontFamily: style.fontFamily,
-          fontStyle:  style.fontStyle,
-          fontWeight: style.fontWeight,
-          textAlign: TextAlign.center,
-          maxLines: 10,
-        )
-    )
-      ..pushStyle(style.getTextStyle())
-      ..addText("Hello World This is a long text ");
+    ui.ParagraphBuilder paragraphBuilder =
+        ui.ParagraphBuilder(ui.ParagraphStyle(
+      fontSize: style.fontSize,
+      fontFamily: style.fontFamily,
+      fontStyle: style.fontStyle,
+      fontWeight: style.fontWeight,
+      textAlign: TextAlign.center,
+      maxLines: 10,
+    ))
+          ..pushStyle(style.getTextStyle())
+          ..addText("Hello World This is a long text ");
 
-    ui.Paragraph paragraph = paragraphBuilder.build()..layout(ui.ParagraphConstraints(width: 300));
+    ui.Paragraph paragraph = paragraphBuilder.build()
+      ..layout(ui.ParagraphConstraints(width: 300));
 
     PrinterStatus status = await printer.printText(paragraph);
 
@@ -664,9 +656,7 @@ class _MyAppState extends State<MyApp> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                       onPressed: () {
-                        //printBle();
-                        //printImageBluetooth();
-                        printLabelTypeB();
+                        printBle();
                       },
                       child: Text("Print Bluetooth")),
                 ),
@@ -710,7 +700,6 @@ class TbPrinterSetup extends StatefulWidget {
 }
 
 class _TbPrinterSetupState extends State<TbPrinterSetup> {
-
   final _ssidEditController = TextEditingController();
   final _ssidWPAKeyController = TextEditingController();
 
@@ -728,29 +717,26 @@ class _TbPrinterSetupState extends State<TbPrinterSetup> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     // TODO: implement dispose
     super.dispose();
 
     _ssidEditController.dispose();
     _ssidWPAKeyController.dispose();
-
   }
 
   Future<bool> configureSSid(String ssid, String passkey) async {
-
-
     await printer.setPrinterInfo(printerInfo);
     bool success = await printer.startCommunication();
-      print("Connected to printer? $success");
+    print("Connected to printer? $success");
 
     success = await printer.clearBuffer();
 
     success = await printer.sendTbCommand(TbCommandSetWlanSsid(ssid));
     print("TypeB: WLAN Set Command Success? $success");
 
-    success =  success && await printer
-        .sendTbCommand(TbCommandSetWlanWpa(passKey: passkey));
+    success = success &&
+        await printer.sendTbCommand(TbCommandSetWlanWpa(passKey: passkey));
     print("TypeB: WPA Set Command Success? $success");
 
     success = await printer.sendTbCommand(TbCommandSetWlanDhcp());
@@ -763,21 +749,20 @@ class _TbPrinterSetupState extends State<TbPrinterSetup> {
     return success;
   }
 
-  Future<bool> printBtInfo () async {
-
+  Future<bool> printBtInfo() async {
     await printer.setPrinterInfo(printerInfo);
     bool success = await printer.startCommunication();
     print("Connected to printer? $success");
 
     success = await printer.clearBuffer();
 
-    success = await printer.sendTbCommand(TbCommandSelfTest(page: TbSelfTestPage.BT));
+    success =
+        await printer.sendTbCommand(TbCommandSelfTest(page: TbSelfTestPage.BT));
     print("TypeB: BT Test Set Command Success? $success");
 
     success = await printer.endCommunication();
 
     return success;
-
   }
 
   Future<bool> printAllSettings() async {
@@ -833,21 +818,26 @@ class _TbPrinterSetupState extends State<TbPrinterSetup> {
                   ElevatedButton(
                       child: Text("Print BT Settings"),
                       onPressed: () {
-                    // Print BT Info
+                        // Print BT Info
                         printBtInfo();
-                  }),
-                  ElevatedButton(onPressed: () {
-                    printAllSettings();
-                    //printer.sendTbCommand(TbCommandSelfTest());
-                  }, child: Text("Print All Settings"))
+                      }),
+                  ElevatedButton(
+                      onPressed: () {
+                        printAllSettings();
+                        //printer.sendTbCommand(TbCommandSelfTest());
+                      },
+                      child: Text("Print All Settings"))
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top:28.0),
-              child: ElevatedButton(onPressed: (){
-                configureSSid(_ssidEditController.value.text, _ssidWPAKeyController.value.text);
-              }, child: Text("Configure WiFI")),
+              padding: const EdgeInsets.only(top: 28.0),
+              child: ElevatedButton(
+                  onPressed: () {
+                    configureSSid(_ssidEditController.value.text,
+                        _ssidWPAKeyController.value.text);
+                  },
+                  child: Text("Configure WiFI")),
             )
           ],
         ),

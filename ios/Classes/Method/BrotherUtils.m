@@ -679,6 +679,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     printerSettings.autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
     printerSettings.cutAtEnd = [[map objectForKey:@"isEndCut"] isEqual:@(YES)];
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartPrintQuality];
+    printerSettings.autoCutForEachPageCount = (NSUInteger)[(NSNumber *)[map objectForKey:@"autoCutForEachPageCount"] integerValue];
     // TODO Extract info from map.
     //[x]labelSize
     //autoCutForEachPageCount
@@ -1234,6 +1235,10 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     printerSettings.printQuality = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality2];
     
+    printerSettings.autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
+    
+    printerSettings.autoCutForEachPageCount = (NSUInteger)[(NSNumber *)[map objectForKey:@"autoCutForEachPageCount"] integerValue];
+        
     // TODO Add extra configuration
     //[x]scaleMode @"printMode"(map)
     //[x]scaleValue @"scaleValue" (double)

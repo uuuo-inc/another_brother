@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'another_brother'
-  s.version          = '0.0.1'
+  s.version          = '0.0.28'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC
 A new flutter plugin project.
@@ -25,7 +25,10 @@ A new flutter plugin project.
   #s.ios.vendored_frameworks = 'Lib/BRPtouchPrinterKit.framework'
   #s.vendored_frameworks = 'BRPtouchPrinterKit.framework'
   
-  s.dependency 'BRLMPrinterKit'
+#   s.dependency 'BRLMPrinterKit', '~> 4.5.2'
+
+  s.ios.vendored_frameworks = 'Lib/BRLMPrinterKit.xcframework'
+
   # Removing RJ-GO libs because they seem to prevent publishing to Apple Store.
   #s.dependency 'BROTHERSDK'
   
