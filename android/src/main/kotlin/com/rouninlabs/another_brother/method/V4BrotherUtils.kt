@@ -214,6 +214,19 @@ fun v4PrinterStatusMap(error: PrintError.ErrorCode): Map<String, Any?> {
             "name" to error.name,
         ),
         "status" to null,
+        "labelId" to -1,
+        "labelType" to -1,
+        "isACConnected" to mapOf(
+            "id" to -1,
+            "name" to "Unknown",
+        ),
+        "isBatteryMounted" to mapOf(
+            "id" to -1,
+            "name" to "Unknown",
+        ),
+        "batteryLevel" to -1,
+        "batteryResidualQuantityLevel" to -1,
+        "maxOfBatteryResidualQuantityLevel" to -1,
     )
 }
 
