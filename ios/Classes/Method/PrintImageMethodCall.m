@@ -72,7 +72,6 @@ static NSString * METHOD_NAME = @"printImage";
         // Call print method
         BRLMPrintError * printError = [printerDriver printImageWithImage:imageRef settings:printerSettings];
 
-
         [printerDriver closeChannel];
 
         // Notify status to Flutter.

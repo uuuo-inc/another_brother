@@ -1,10 +1,12 @@
 package com.rouninlabs.another_brother.method
 
+import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.hardware.usb.UsbManager
 import android.util.Log
+import androidx.annotation.RequiresPermission
 import com.brother.ptouch.sdk.*
 import com.brother.ptouch.sdk.Unit
 import com.rouninlabs.another_brother.BrotherManager
@@ -100,7 +102,7 @@ fun customPaperInfoFromMap(map:Map<String, Any>?):CustomPaperInfo? {
 
         val customPaperInfo:CustomPaperInfo = when(paperKind) {
             PaperKind.DIE_CUT -> {
-                CustomPaperInfo.newCustomDiaCutPaper(printerModel,
+                CustomPaperInfo.newCustomDieCutPaper(printerModel,
                         unit, tapeWidth, tapeLength, rightMargin, leftMargin, topMargin, bottomMargin, labelPitch)
             }
             PaperKind.MARKED_ROLL -> {
