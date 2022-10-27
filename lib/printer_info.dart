@@ -885,6 +885,9 @@ class ErrorCode {
       ErrorCode._internal(56, "ERROR_MINIMUM_LENGTH_LIMIT");
   static const ERROR_WORKPATH_NOT_SET =
       ErrorCode._internal(57, "ERROR_WORKPATH_NOT_SET");
+  // Another_Brother specific error. Sent when the Android device does not have storage permissions granted.
+  static const ERROR_STORAGE_PERMISSION_NOT_GRANTED =
+      ErrorCode._internal(9999, "ERROR_STORAGE_PERMISSION_NOT_GRANTED");
 
   static final _values = [
     ERROR_NONE,
@@ -942,7 +945,8 @@ class ErrorCode {
     ERROR_UNSUPPORTED_TWO_COLOR,
     ERROR_UNSUPPORTED_MONO_COLOR,
     ERROR_MINIMUM_LENGTH_LIMIT,
-    ERROR_WORKPATH_NOT_SET
+    ERROR_WORKPATH_NOT_SET,
+    ERROR_STORAGE_PERMISSION_NOT_GRANTED
   ];
 
   int getId() {

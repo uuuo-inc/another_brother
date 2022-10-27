@@ -4,8 +4,10 @@ import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Context
+import android.content.pm.PackageManager
 import android.hardware.usb.UsbManager
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.annotation.RequiresPermission
 import com.brother.ptouch.sdk.*
 import com.brother.ptouch.sdk.Unit
@@ -271,7 +273,16 @@ fun powerSaveModeFromMap(map:Map<String, Any>):BluetoothPreference.PowerSaveMode
 }
 
 
-fun PrinterInfo.ErrorCode.toMap(): Map<String, Any> {
+fun PrinterInfo.ErrorCode.toMap(context:Context? = null): Map<String, Any> {
+    // TODO IF it is ERROR_INCORRECT_LABEL check if we have Storage permission
+    if (context != null && name == PrinterInfo.ErrorCode.ERROR_WRONG_LABEL.name && ContextCompat.checkSelfPermission(context, "android.permission.WRITE_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED){
+        // When the App does not have storage permissions the Brother libs fail with this error ERROR_WRONG_LABEL
+        // We convert it to a more meaningful one.
+        return hashMapOf(
+            "id" to 9999,
+            "name" to "ERROR_STORAGE_PERMISSION_NOT_GRANTED"
+        )
+    }
     return hashMapOf(
             "id" to -1,
             "name" to name
@@ -302,9 +313,9 @@ fun JNIStatus.BatteryTernary.toMap(): Map<String, Any> {
     )
 }
 
-fun PrinterStatus.toMap(): Map<String, Any> {
+fun PrinterStatus.toMap(context:Context? = null): Map<String, Any> {
     return hashMapOf(
-            "errorCode" to errorCode.toMap(),
+            "errorCode" to errorCode.toMap(context),
             "labelId" to labelId,
             "labelType" to labelType,
             "isACConnected" to isACConnected.toMap(),

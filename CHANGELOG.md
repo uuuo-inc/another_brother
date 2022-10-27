@@ -54,3 +54,21 @@
 
 ## 0.0.22
 - PaperSize now shares common interface as other labels.
+
+## 0.0.23
+- Fixes issue with startPTTPrint. Special thanks to rendesg for the fixes.
+
+## 0.0.24
+- Fixes exception on iOS print. Special thanks to BentEngbers for the report.
+
+## 0.0.25
+- Moved from JCenter to MavenCentral for Android dependencies.
+
+## 0.0.26
+- Added Bluetooth permissions required by Android 12
+
+## 0.0.27
+- Replaces flutter_blue with flutter_blu_plus
+
+## 0.0.28
+- Resolves issue where app UI freezes while calling printImage on iOS.

@@ -22,7 +22,8 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        //jcenter()
         maven {
             url "file://$localMavenPath"
         }
