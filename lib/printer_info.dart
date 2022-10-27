@@ -165,6 +165,8 @@ class Model implements AModel {
   static final PT_P715eBT = Model._internal2("PT_P715eBT", 69, PT_E550W);
   static final PT_P910BT = Model._internal(
       "PT_P910BT", 68, PT.W36.getId(), PrinterSeries.PT_LABEL_PRINTER);
+  static final RJ_3250WB = Model._internal(
+      "RJ_3250WB", 70, PaperSize.A4.getPaperId(), PrinterSeries.MOBILE_PRINTER);
   static final UNSUPPORTED = Model._internal("UNSUPPORTED", 255,
       PaperSize.CUSTOM.getPaperId(), PrinterSeries.UNSUPPORTED);
 
@@ -236,6 +238,7 @@ class Model implements AModel {
     MW_270,
     PT_P715eBT,
     PT_P910BT,
+    RJ_3250WB,
     UNSUPPORTED
   ];
 
@@ -885,6 +888,7 @@ class ErrorCode {
       ErrorCode._internal(56, "ERROR_MINIMUM_LENGTH_LIMIT");
   static const ERROR_WORKPATH_NOT_SET =
       ErrorCode._internal(57, "ERROR_WORKPATH_NOT_SET");
+
   // Another_Brother specific error. Sent when the Android device does not have storage permissions granted.
   static const ERROR_STORAGE_PERMISSION_NOT_GRANTED =
       ErrorCode._internal(9999, "ERROR_STORAGE_PERMISSION_NOT_GRANTED");

@@ -47,15 +47,9 @@ class V4PrintImageMethodCall(
             // Decoded Printer Info
             val printSettings = printSettingsFromMap(
                 context = context,
-                flutterAssets = flutterAssets,
                 map = dartPrintInfo
             )
-            Log.e("Brother", "PrintInfo: $dartPrintInfo")
-            Log.e("Brother", "Parsed Info: ${printSettings}")
-            Log.e("Brother", "Parsed Info: ${printSettings.customPaperSize.paperKind}")
-            Log.e("Brother", "Parsed Info: ${printSettings.customPaperSize.width}")
-            Log.e("Brother", "Parsed Info: ${printSettings.customPaperSize.length}")
-            Log.e("Brother", "Parsed Info: ${printSettings.customPaperSize.gapLength}")
+            Log.i("Brother", "PrintInfo: $dartPrintInfo")
 
             // Prepare local connection.
             val channel = PrinterChannel.newBluetoothChannel(

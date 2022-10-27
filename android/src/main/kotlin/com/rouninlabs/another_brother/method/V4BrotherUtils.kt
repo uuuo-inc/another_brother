@@ -3,26 +3,46 @@ package com.rouninlabs.another_brother.method
 import android.content.Context
 import android.util.Log
 import com.brother.sdk.lmprinter.*
-import com.brother.sdk.lmprinter.setting.CustomPaperSize
+import com.brother.sdk.lmprinter.setting.*
 import com.brother.sdk.lmprinter.setting.CustomPaperSize.PaperKind
-import com.brother.sdk.lmprinter.setting.PrintImageSettings
-import com.brother.sdk.lmprinter.setting.TDPrintSettings
-import io.flutter.embedding.engine.plugins.FlutterPlugin
+import com.brother.sdk.lmprinter.setting.PrintImageSettings.HorizontalAlignment
+import com.brother.sdk.lmprinter.setting.PrintImageSettings.VerticalAlignment
 
 fun printSettingsFromMap(
     context: Context,
-    flutterAssets: FlutterPlugin.FlutterAssets,
     map: HashMap<String, Any>
-): TDPrintSettings {
-    val model: PrinterModel = v4ModelFromMap(map.getMap("printerModel"))
-    return when (model) {
+): PrintSettings {
+    return when (v4ModelFromMap(map.getMap("printerModel"))) {
+        PrinterModel.RJ_2030,
+        PrinterModel.RJ_2050,
+        PrinterModel.RJ_2140,
+        PrinterModel.RJ_2150,
+        PrinterModel.RJ_3050,
+        PrinterModel.RJ_3050Ai,
+        PrinterModel.RJ_3150,
+        PrinterModel.RJ_3150Ai,
+        PrinterModel.RJ_3230B,
+        PrinterModel.RJ_3250WB,
+        PrinterModel.RJ_4030,
+        PrinterModel.RJ_4030Ai,
+        PrinterModel.RJ_4040,
+        PrinterModel.RJ_4230B,
+        PrinterModel.RJ_4250WB,
+        -> {
+            v4RjPrintSettingsFromMap(context, map)
+        }
+        PrinterModel.TD_2020,
         PrinterModel.TD_2120N,
         PrinterModel.TD_2130N,
+        PrinterModel.TD_4000,
         PrinterModel.TD_4100N,
+        PrinterModel.TD_4410D,
+        PrinterModel.TD_4510D,
         PrinterModel.TD_4420DN,
         PrinterModel.TD_4520DN,
-        PrinterModel.TD_4550DNWB -> {
-            v4TdPrintSettingsFromMap(context, model, map)
+        PrinterModel.TD_4550DNWB,
+        -> {
+            v4TdPrintSettingsFromMap(context, map)
         }
         else -> {
             throw UnsupportedOperationException()
@@ -32,10 +52,9 @@ fun printSettingsFromMap(
 
 fun v4TdPrintSettingsFromMap(
     context: Context,
-    model: PrinterModel,
     map: Map<String, Any>,
 ): TDPrintSettings {
-    return TDPrintSettings(model).apply {
+    return TDPrintSettings(v4ModelFromMap(map.getMap("printerModel"))).apply {
         workPath = context.filesDir.absolutePath
         printOrientation = v4OrientationFromMap(map.getMap("orientation"))
         numCopies = map["numberOfCopies"] as Int
@@ -46,6 +65,25 @@ fun v4TdPrintSettingsFromMap(
         isCutAtEnd = map["isCutAtEnd"] as Boolean
         printQuality = v4PrintQualityFromMap(map.getMap("printQuality"))
         scaleValue = map.getFloat("scaleValue")
+        customPaperSize = v4CustomPaperSizeFromMap(map.getMap("customPaperInfo"))
+    }
+}
+
+fun v4RjPrintSettingsFromMap(
+    context: Context,
+    map: Map<String, Any>,
+): RJPrintSettings {
+    /*
+    * TODO:
+    *   - scaleMode
+    * */
+    return RJPrintSettings(v4ModelFromMap(map.getMap("printerModel"))).apply {
+        workPath = context.filesDir.absolutePath
+        scaleValue = map.getFloat("scaleValue")
+        printOrientation = v4OrientationFromMap(map.getMap("orientation"))
+        halftone = v4HalftoneFromMap(map.getMap("halftone"))
+        hAlignment = v4HorizontalAlignmentFromMap(map.getMap("align"))
+        vAlignment = v4VerticalAlignmentFromMap(map.getMap("valign"))
         customPaperSize = v4CustomPaperSizeFromMap(map.getMap("customPaperInfo"))
     }
 }
@@ -148,6 +186,24 @@ fun v4UnitFromMap(map: Map<String, Any>): CustomPaperSize.Unit {
         "Inch" -> CustomPaperSize.Unit.Inch
         "Mm" -> CustomPaperSize.Unit.Mm
         else -> throw Exception("Unknown CustomPaperSize.Unit: ${map["name"]}")
+    }
+}
+
+fun v4HorizontalAlignmentFromMap(map: Map<String, Any>): HorizontalAlignment {
+    return when (map["name"]) {
+        "LEFT" -> HorizontalAlignment.Left
+        "CENTER" -> HorizontalAlignment.Center
+        "RIGHT" -> HorizontalAlignment.Right
+        else -> throw UnsupportedOperationException()
+    }
+}
+
+fun v4VerticalAlignmentFromMap(map: Map<String, Any>): VerticalAlignment {
+    return when (map["name"]) {
+        "TOP" -> VerticalAlignment.Top
+        "MIDDLE" -> VerticalAlignment.Center
+        "BOTTOM" -> VerticalAlignment.Bottom
+        else -> throw UnsupportedOperationException()
     }
 }
 
