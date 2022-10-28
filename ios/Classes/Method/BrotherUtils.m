@@ -453,11 +453,11 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     BRLMCustomPaperSizeMargins margins = [BrotherUtils customMarginFromMapWithValue:map];
     
-    float tapeWidth = [(NSNumber *)[map objectForKey:@"tapeWidth"] floatValue];
-    float tapeLength = [(NSNumber *)[map objectForKey:@"tapeLength"] floatValue];
-    float markHeight = [(NSNumber *)[map objectForKey:@"markHeight"] floatValue];
-    float gapLength = [(NSNumber *)[map objectForKey:@"labelPitch"] floatValue];
-    float markPosition = [(NSNumber *)[map objectForKey:@"markPosition"] floatValue];
+    float tapeWidth = [(NSNumber *)[map objectForKey:@"tapeWidth"] doubleValue];
+    float tapeLength = [(NSNumber *)[map objectForKey:@"tapeLength"] doubleValue];
+    float markHeight = [(NSNumber *)[map objectForKey:@"markHeight"] doubleValue];
+    float gapLength = [(NSNumber *)[map objectForKey:@"labelPitch"] doubleValue];
+    float markPosition = [(NSNumber *)[map objectForKey:@"markPosition"] doubleValue];
     
     
     if (paperKind == BRLMCustomPaperSizePaperKindDieCut) {
@@ -840,10 +840,6 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     }
     
     printerSettings.halftoneThreshold = [(NSNumber *)[map objectForKey:@"thresholdingValue"] intValue];
-    
-    
-    NSUInteger numberOfCopies =
-    printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
     
     printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
     
