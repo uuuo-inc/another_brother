@@ -39,7 +39,7 @@ class PrintFileListMethodCall(
             val filePathList: List<String> = call.argument("filePathList")!!
 
             // Decoded Printer Info
-            val printSettings = printSettingsFromMap(context = context, map = dartPrintInfo)
+            val printSettings = v4PrintSettingsFromMap(context = context, map = dartPrintInfo)
 
             val channel = Channel.newBluetoothChannel(
                 dartPrintInfo["macAddress"] as String,
@@ -67,11 +67,8 @@ class PrintFileListMethodCall(
 
             driver.closeChannel()
 
-            // Encode PrinterStatus
             withContext(Dispatchers.Main) {
-                // Set result Printer status.
                 result.success(v4PrinterStatusMap(error))
-                //result.error("Error", "Method not implemented", "")
             }
         }
 

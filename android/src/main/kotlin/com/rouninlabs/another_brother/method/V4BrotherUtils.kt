@@ -8,11 +8,11 @@ import com.brother.sdk.lmprinter.setting.CustomPaperSize.PaperKind
 import com.brother.sdk.lmprinter.setting.PrintImageSettings.HorizontalAlignment
 import com.brother.sdk.lmprinter.setting.PrintImageSettings.VerticalAlignment
 
-fun printSettingsFromMap(
+fun v4PrintSettingsFromMap(
     context: Context,
     map: HashMap<String, Any>
 ): PrintSettings {
-    return when (v4ModelFromMap(map.getMap("printerModel"))) {
+    return when (map.getMapOrNull("printerModel")?.run(::v4ModelFromMap)) {
         PrinterModel.RJ_2030,
         PrinterModel.RJ_2050,
         PrinterModel.RJ_2140,
@@ -54,18 +54,19 @@ fun v4TdPrintSettingsFromMap(
     context: Context,
     map: Map<String, Any>,
 ): TDPrintSettings {
-    return TDPrintSettings(v4ModelFromMap(map.getMap("printerModel"))).apply {
+    return TDPrintSettings(map.getMapOrNull("printerModel")?.run(::v4ModelFromMap)).apply {
         workPath = context.filesDir.absolutePath
-        printOrientation = v4OrientationFromMap(map.getMap("orientation"))
+        printOrientation = map.getMapOrNull("orientation")?.run(::v4OrientationFromMap)
         numCopies = map["numberOfCopies"] as Int
-        halftone = v4HalftoneFromMap(map.getMap("halftone"))
-        isAutoCut = map.getBool("isAutoCut")
-        isPeelLabel = map.getBool("peelMode")
-        autoCutForEachPageCount = map["autoCutForEachPageCount"] as Int
-        isCutAtEnd = map["isCutAtEnd"] as Boolean
-        printQuality = v4PrintQualityFromMap(map.getMap("printQuality"))
+        halftone = map.getMapOrNull("halftone")?.run(::v4HalftoneFromMap)
+        isAutoCut = map.getBoolOrNull("isAutoCut") ?: false
+        isPeelLabel = map.getBoolOrNull("peelMode") ?: false
+        map.getIntOrNull("autoCutForEachPageCount")?.let { autoCutForEachPageCount = it }
+        isCutAtEnd = map.getBoolOrNull("isCutAtEnd") ?: false
+        printQuality = map.getMapOrNull("printQuality")?.run(::v4PrintQualityFromMap)
         scaleValue = map.getFloat("scaleValue")
-        customPaperSize = v4CustomPaperSizeFromMap(map.getMap("customPaperInfo"))
+        printOrientation = map.getMapOrNull("orientation")?.run(::v4OrientationFromMap)
+        customPaperSize = map.getMapOrNull("customPaperInfo")?.run(::v4CustomPaperSizeFromMap)
     }
 }
 
@@ -77,14 +78,15 @@ fun v4RjPrintSettingsFromMap(
     * TODO:
     *   - scaleMode
     * */
-    return RJPrintSettings(v4ModelFromMap(map.getMap("printerModel"))).apply {
+    return RJPrintSettings(map.getMapOrNull("printerModel")?.run(::v4ModelFromMap)).apply {
         workPath = context.filesDir.absolutePath
         scaleValue = map.getFloat("scaleValue")
-        printOrientation = v4OrientationFromMap(map.getMap("orientation"))
-        halftone = v4HalftoneFromMap(map.getMap("halftone"))
-        hAlignment = v4HorizontalAlignmentFromMap(map.getMap("align"))
-        vAlignment = v4VerticalAlignmentFromMap(map.getMap("valign"))
-        customPaperSize = v4CustomPaperSizeFromMap(map.getMap("customPaperInfo"))
+        printOrientation = map.getMapOrNull("orientation")?.run(::v4OrientationFromMap)
+        halftone = map.getMapOrNull("halftone")?.run(::v4HalftoneFromMap)
+        hAlignment = map.getMapOrNull("align")?.run(::v4HorizontalAlignmentFromMap)
+        vAlignment = map.getMapOrNull("valign")?.run(::v4VerticalAlignmentFromMap)
+        isPeelLabel = map.getBoolOrNull("peelMode") ?: false
+        customPaperSize = map.getMapOrNull("customPaperInfo")?.run(::v4CustomPaperSizeFromMap)
     }
 }
 
@@ -124,7 +126,7 @@ fun v4CustomPaperSizeFromMap(map: Map<String, Any>): CustomPaperSize {
 //    {paperKind={name=DIE_CUT}, markPosition=0.0, printerModel={name=TD_4550DNWB, id=65}, unit={name=Mm}, leftMargin=2.0, topMargin=0.0, rightMargin=2.0, markHeight=0.0, tapeWidth=80.0, bottomMargin=0.0, tapeLength=115.0, labelPitch=3.0}
 
     Log.d("V4BrotherUtils", "customPaperSizeMap=${map}")
-    return when (v4PaperKindFromMap(map.getMap("paperKind"))) {
+    return when (map.getMapOrNull("paperKind")?.run(::v4PaperKindFromMap)) {
         PaperKind.Roll -> {
             CustomPaperSize.newRollPaperSize(
                 map.getFloat("tapeWidth"),
@@ -134,7 +136,7 @@ fun v4CustomPaperSizeFromMap(map: Map<String, Any>): CustomPaperSize {
                     map.getFloat("bottomMargin"),
                     map.getFloat("rightMargin"),
                 ),
-                v4UnitFromMap(map.getMap("unit")),
+                map.getMapOrNull("unit")?.run(::v4UnitFromMap),
             )
         }
         PaperKind.DieCut -> {
@@ -148,7 +150,7 @@ fun v4CustomPaperSizeFromMap(map: Map<String, Any>): CustomPaperSize {
                     map.getFloat("rightMargin"),
                 ),
                 map.getFloat("labelPitch"),
-                v4UnitFromMap(map.getMap("unit")),
+                map.getMapOrNull("unit")?.run(::v4UnitFromMap),
             )
         }
         PaperKind.MarkRoll -> {
@@ -163,10 +165,13 @@ fun v4CustomPaperSizeFromMap(map: Map<String, Any>): CustomPaperSize {
                 ),
                 map.getFloat("markPosition"),
                 map.getFloat("markHeight"),
-                v4UnitFromMap(map.getMap("unit")),
+                map.getMapOrNull("unit")?.run(::v4UnitFromMap),
             )
         }
         PaperKind.ByFile -> {
+            throw UnsupportedOperationException()
+        }
+        else -> {
             throw UnsupportedOperationException()
         }
     }
@@ -231,14 +236,18 @@ fun v4PrinterStatusMap(error: PrintError.ErrorCode): Map<String, Any?> {
 }
 
 @Suppress("UNCHECKED_CAST")
-private fun Map<String, Any>.getMap(key: String): Map<String, Any> {
-    return this[key] as Map<String, Any>
+private fun Map<String, Any>.getMapOrNull(key: String): Map<String, Any>? {
+    return this[key] as? Map<String, Any>
 }
 
 private fun Map<String, Any>.getFloat(key: String): Float {
     return (this[key] as? Double)?.toFloat() ?: 0f
 }
 
-private fun Map<String, Any>.getBool(key: String): Boolean {
-    return this[key] as Boolean
+private fun Map<String, Any>.getIntOrNull(key: String): Int? {
+    return this[key] as? Int
+}
+
+private fun Map<String, Any>.getBoolOrNull(key: String): Boolean? {
+    return this[key] as? Boolean
 }

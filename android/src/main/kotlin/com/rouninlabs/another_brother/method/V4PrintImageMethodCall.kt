@@ -45,7 +45,7 @@ class V4PrintImageMethodCall(
             // Bytes to bitmap
             val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
             // Decoded Printer Info
-            val printSettings = printSettingsFromMap(
+            val printSettings = v4PrintSettingsFromMap(
                 context = context,
                 map = dartPrintInfo
             )

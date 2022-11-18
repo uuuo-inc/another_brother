@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
@@ -784,232 +785,61 @@ class CheckPrintEnd {
   }
 }
 
-class ErrorCode {
-  final int _id;
-  final String _name;
+enum ErrorCode {
+  noError('NoError'),
+  printSettingsError('PrintSettingsError'),
+  filepathURLError('FilepathURLError'),
+  pdfPageError('PDFPageError'),
+  printSettingsNotSupportError('PrintSettingsNotSupportError'),
+  dataBufferError('DataBufferError'),
+  printerModelError('PrinterModelError'),
+  workPathError('WorkPathError'),
+  canceled('Canceled'),
+  channelTimeout('ChannelTimeout'),
+  setModelError('SetModelError'),
+  unsupportedFile('UnsupportedFile'),
+  setMarginError('SetMarginError'),
+  setLabelSizeError('SetLabelSizeError'),
+  customPaperSizeError('CustomPaperSizeError'),
+  setLengthError('SetLengthError'),
+  tubeSettingError('TubeSettingError'),
+  channelErrorStreamStatusError('ChannelErrorStreamStatusError'),
+  channelErrorUnsupportedChannel('ChannelErrorUnsupportedChannel'),
+  printerStatusErrorPaperEmpty('PrinterStatusErrorPaperEmpty'),
+  printerStatusErrorCoverOpen('PrinterStatusErrorCoverOpen'),
+  printerStatusErrorBusy('PrinterStatusErrorBusy'),
+  printerStatusErrorPrinterTurnedOff('PrinterStatusErrorPrinterTurnedOff'),
+  printerStatusErrorBatteryWeak('PrinterStatusErrorBatteryWeak'),
+  printerStatusErrorExpansionBufferFull(
+      'PrinterStatusErrorExpansionBufferFull'),
+  printerStatusErrorCommunicationError('PrinterStatusErrorCommunicationError'),
+  printerStatusErrorPaperJam('PrinterStatusErrorPaperJam'),
+  printerStatusErrorMediaCannotBeFed('PrinterStatusErrorMediaCannotBeFed'),
+  printerStatusErrorOverHeat('PrinterStatusErrorOverHeat'),
+  printerStatusErrorHighVoltageAdapter('PrinterStatusErrorHighVoltageAdapter'),
+  printerStatusErrorUnknownError('PrinterStatusErrorUnknownError'),
+  unknownError('UnknownError'),
+  ;
 
-  const ErrorCode._internal(this._id, this._name);
+  const ErrorCode(this.code);
 
-  static const ERROR_NONE = ErrorCode._internal(1, "ERROR_NONE");
-  static const ERROR_NOT_SAME_MODEL =
-      ErrorCode._internal(2, "ERROR_NOT_SAME_MODEL");
-  static const ERROR_BROTHER_PRINTER_NOT_FOUND =
-      ErrorCode._internal(3, "ERROR_BROTHER_PRINTER_NOT_FOUND");
-  static const ERROR_PAPER_EMPTY = ErrorCode._internal(4, "ERROR_PAPER_EMPTY");
-  static const ERROR_BATTERY_EMPTY =
-      ErrorCode._internal(5, "ERROR_BATTERY_EMPTY");
-  static const ERROR_COMMUNICATION_ERROR =
-      ErrorCode._internal(6, "ERROR_COMMUNICATION_ERROR");
-  static const ERROR_OVERHEAT = ErrorCode._internal(7, "ERROR_OVERHEAT");
-  static const ERROR_PAPER_JAM = ErrorCode._internal(8, "ERROR_PAPER_JAM");
-  static const ERROR_HIGH_VOLTAGE_ADAPTER =
-      ErrorCode._internal(9, "ERROR_HIGH_VOLTAGE_ADAPTER");
-  static const ERROR_CHANGE_CASSETTE =
-      ErrorCode._internal(10, "ERROR_CHANGE_CASSETTE");
-  static const ERROR_FEED_OR_CASSETTE_EMPTY =
-      ErrorCode._internal(11, "ERROR_FEED_OR_CASSETTE_EMPTY");
-  static const ERROR_SYSTEM_ERROR =
-      ErrorCode._internal(12, "ERROR_SYSTEM_ERROR");
-  static const ERROR_NO_CASSETTE = ErrorCode._internal(13, "ERROR_NO_CASSETTE");
-  static const ERROR_WRONG_CASSETTE_DIRECT =
-      ErrorCode._internal(14, "ERROR_WRONG_CASSETTE_DIRECT");
-  static const ERROR_CREATE_SOCKET_FAILED =
-      ErrorCode._internal(15, "ERROR_CREATE_SOCKET_FAILED");
-  static const ERROR_CONNECT_SOCKET_FAILED =
-      ErrorCode._internal(16, "ERROR_CONNECT_SOCKET_FAILED");
-  static const ERROR_GET_OUTPUT_STREAM_FAILED =
-      ErrorCode._internal(17, "ERROR_GET_OUTPUT_STREAM_FAILED");
-  static const ERROR_GET_INPUT_STREAM_FAILED =
-      ErrorCode._internal(18, "ERROR_GET_INPUT_STREAM_FAILED");
-  static const ERROR_CLOSE_SOCKET_FAILED =
-      ErrorCode._internal(19, "ERROR_CLOSE_SOCKET_FAILED");
-  static const ERROR_OUT_OF_MEMORY =
-      ErrorCode._internal(20, "ERROR_OUT_OF_MEMORY");
-  static const ERROR_SET_OVER_MARGIN =
-      ErrorCode._internal(21, "ERROR_SET_OVER_MARGIN");
-  static const ERROR_NO_SD_CARD = ErrorCode._internal(22, "ERROR_NO_SD_CARD");
-  static const ERROR_FILE_NOT_SUPPORTED =
-      ErrorCode._internal(23, "ERROR_FILE_NOT_SUPPORTED");
-  static const ERROR_EVALUATION_TIMEUP =
-      ErrorCode._internal(24, "ERROR_EVALUATION_TIMEUP");
-  static const ERROR_WRONG_CUSTOM_INFO =
-      ErrorCode._internal(25, "ERROR_WRONG_CUSTOM_INFO");
-  static const ERROR_NO_ADDRESS = ErrorCode._internal(26, "ERROR_NO_ADDRESS");
-  static const ERROR_NOT_MATCH_ADDRESS =
-      ErrorCode._internal(27, "ERROR_NOT_MATCH_ADDRESS");
-  static const ERROR_FILE_NOT_FOUND =
-      ErrorCode._internal(28, "ERROR_FILE_NOT_FOUND");
-  static const ERROR_TEMPLATE_FILE_NOT_MATCH_MODEL =
-      ErrorCode._internal(29, "ERROR_TEMPLATE_FILE_NOT_MATCH_MODEL");
-  static const ERROR_TEMPLATE_NOT_TRANS_MODEL =
-      ErrorCode._internal(30, "ERROR_TEMPLATE_NOT_TRANS_MODEL");
-  static const ERROR_COVER_OPEN = ErrorCode._internal(31, "ERROR_COVER_OPEN");
-  static const ERROR_WRONG_LABEL = ErrorCode._internal(32, "ERROR_WRONG_LABEL");
-  static const ERROR_PORT_NOT_SUPPORTED =
-      ErrorCode._internal(33, "ERROR_PORT_NOT_SUPPORTED");
-  static const ERROR_WRONG_TEMPLATE_KEY =
-      ErrorCode._internal(34, "ERROR_WRONG_TEMPLATE_KEY");
-  static const ERROR_BUSY = ErrorCode._internal(35, "ERROR_BUSY");
-  static const ERROR_TEMPLATE_NOT_PRINT_MODEL =
-      ErrorCode._internal(36, "ERROR_TEMPLATE_NOT_PRINT_MODEL");
-  static const ERROR_CANCEL = ErrorCode._internal(37, "ERROR_CANCEL");
-  static const ERROR_PRINTER_SETTING_NOT_SUPPORTED =
-      ErrorCode._internal(38, "ERROR_PRINTER_SETTING_NOT_SUPPORTED");
-  static const ERROR_INVALID_PARAMETER =
-      ErrorCode._internal(39, "ERROR_INVALID_PARAMETER");
-  static const ERROR_INTERNAL_ERROR =
-      ErrorCode._internal(40, "ERROR_INTERNAL_ERROR");
-  static const ERROR_TEMPLATE_NOT_CONTROL_MODEL =
-      ErrorCode._internal(41, "ERROR_TEMPLATE_NOT_CONTROL_MODEL");
-  static const ERROR_TEMPLATE_NOT_EXIST =
-      ErrorCode._internal(42, "ERROR_TEMPLATE_NOT_EXIST");
-  static const ERROR_BUFFER_FULL = ErrorCode._internal(44, "ERROR_BUFFER_FULL");
-  static const ERROR_TUBE_EMPTY = ErrorCode._internal(45, "ERROR_TUBE_EMPTY");
-  static const ERROR_TUBE_RIBBON_EMPTY =
-      ErrorCode._internal(46, "ERROR_TUBE_RIBBON_EMPTY");
-  static const ERROR_UPDATE_FRIM_NOT_SUPPORTED =
-      ErrorCode._internal(47, "ERROR_UPDATE_FRIM_NOT_SUPPORTED");
-  static const ERROR_OS_VERSION_NOT_SUPPORTED =
-      ErrorCode._internal(48, "ERROR_OS_VERSION_NOT_SUPPORTED");
-  static const ERROR_RESOLUTION_MODE =
-      ErrorCode._internal(49, "ERROR_RESOLUTION_MODE");
-  static const ERROR_POWER_CABLE_UNPLUGGING =
-      ErrorCode._internal(50, "ERROR_POWER_CABLE_UNPLUGGING");
-  static const ERROR_BATTERY_TROUBLE =
-      ErrorCode._internal(51, "ERROR_BATTERY_TROUBLE");
-  static const ERROR_UNSUPPORTED_MEDIA =
-      ErrorCode._internal(52, "ERROR_UNSUPPORTED_MEDIA");
-  static const ERROR_TUBE_CUTTER = ErrorCode._internal(53, "ERROR_TUBE_CUTTER");
-  static const ERROR_UNSUPPORTED_TWO_COLOR =
-      ErrorCode._internal(54, "ERROR_UNSUPPORTED_TWO_COLOR");
-  static const ERROR_UNSUPPORTED_MONO_COLOR =
-      ErrorCode._internal(55, "ERROR_UNSUPPORTED_MONO_COLOR");
-  static const ERROR_MINIMUM_LENGTH_LIMIT =
-      ErrorCode._internal(56, "ERROR_MINIMUM_LENGTH_LIMIT");
-  static const ERROR_WORKPATH_NOT_SET =
-      ErrorCode._internal(57, "ERROR_WORKPATH_NOT_SET");
+  final String code;
 
-  // Another_Brother specific error. Sent when the Android device does not have storage permissions granted.
-  static const ERROR_STORAGE_PERMISSION_NOT_GRANTED =
-      ErrorCode._internal(9999, "ERROR_STORAGE_PERMISSION_NOT_GRANTED");
-
-  static final _values = [
-    ERROR_NONE,
-    ERROR_NOT_SAME_MODEL,
-    ERROR_BROTHER_PRINTER_NOT_FOUND,
-    ERROR_PAPER_EMPTY,
-    ERROR_BATTERY_EMPTY,
-    ERROR_COMMUNICATION_ERROR,
-    ERROR_OVERHEAT,
-    ERROR_PAPER_JAM,
-    ERROR_HIGH_VOLTAGE_ADAPTER,
-    ERROR_CHANGE_CASSETTE,
-    ERROR_FEED_OR_CASSETTE_EMPTY,
-    ERROR_SYSTEM_ERROR,
-    ERROR_NO_CASSETTE,
-    ERROR_WRONG_CASSETTE_DIRECT,
-    ERROR_CREATE_SOCKET_FAILED,
-    ERROR_CONNECT_SOCKET_FAILED,
-    ERROR_GET_OUTPUT_STREAM_FAILED,
-    ERROR_GET_INPUT_STREAM_FAILED,
-    ERROR_CLOSE_SOCKET_FAILED,
-    ERROR_OUT_OF_MEMORY,
-    ERROR_SET_OVER_MARGIN,
-    ERROR_NO_SD_CARD,
-    ERROR_FILE_NOT_SUPPORTED,
-    ERROR_EVALUATION_TIMEUP,
-    ERROR_WRONG_CUSTOM_INFO,
-    ERROR_NO_ADDRESS,
-    ERROR_NOT_MATCH_ADDRESS,
-    ERROR_FILE_NOT_FOUND,
-    ERROR_TEMPLATE_FILE_NOT_MATCH_MODEL,
-    ERROR_TEMPLATE_NOT_TRANS_MODEL,
-    ERROR_COVER_OPEN,
-    ERROR_WRONG_LABEL,
-    ERROR_PORT_NOT_SUPPORTED,
-    ERROR_WRONG_TEMPLATE_KEY,
-    ERROR_BUSY,
-    ERROR_TEMPLATE_NOT_PRINT_MODEL,
-    ERROR_CANCEL,
-    ERROR_PRINTER_SETTING_NOT_SUPPORTED,
-    ERROR_INVALID_PARAMETER,
-    ERROR_INTERNAL_ERROR,
-    ERROR_TEMPLATE_NOT_CONTROL_MODEL,
-    ERROR_TEMPLATE_NOT_EXIST,
-    ERROR_BUFFER_FULL,
-    ERROR_TUBE_EMPTY,
-    ERROR_TUBE_RIBBON_EMPTY,
-    ERROR_UPDATE_FRIM_NOT_SUPPORTED,
-    ERROR_OS_VERSION_NOT_SUPPORTED,
-    ERROR_RESOLUTION_MODE,
-    ERROR_POWER_CABLE_UNPLUGGING,
-    ERROR_BATTERY_TROUBLE,
-    ERROR_UNSUPPORTED_MEDIA,
-    ERROR_TUBE_CUTTER,
-    ERROR_UNSUPPORTED_TWO_COLOR,
-    ERROR_UNSUPPORTED_MONO_COLOR,
-    ERROR_MINIMUM_LENGTH_LIMIT,
-    ERROR_WORKPATH_NOT_SET,
-    ERROR_STORAGE_PERMISSION_NOT_GRANTED
-  ];
-
-  int getId() {
-    return _id;
-  }
-
-  String getName() {
-    return _name;
-  }
-
-  static int getItemId(index) {
-    if (index < 0 || index > _values.length) {
-      return ERROR_INTERNAL_ERROR.getId();
-    }
-
-    return _values[index].getId();
-  }
-
-  static ErrorCode valueFromID(int id) {
-    for (int i = 0; i < _values.length; ++i) {
-      ErrorCode num = _values[i];
-      if (num.getId() == id) {
-        return num;
+  static ErrorCode fromCode(String code) {
+    for (final value in ErrorCode.values) {
+      if (value.code == code) {
+        return value;
       }
     }
-    return ERROR_INTERNAL_ERROR;
+    return ErrorCode.unknownError;
   }
 
-  static ErrorCode valueFromName(String name) {
-    for (int i = 0; i < _values.length; ++i) {
-      ErrorCode num = _values[i];
-      if (num.getName() == name) {
-        return num;
-      }
-    }
-    return ERROR_INTERNAL_ERROR;
+  Map<String, String> toMap() {
+    return {
+      'id': index.toString(),
+      'name': name,
+    };
   }
-
-  static int ordinalFromID(int id) {
-    for (int i = 0; i < _values.length; ++i) {
-      ErrorCode num = _values[i];
-      if (num.getId() == id) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  static ErrorCode fromMap(Map<dynamic, dynamic> map) {
-    int id = map["id"];
-    String name = map["name"];
-    return ErrorCode.valueFromName(name);
-  }
-
-  Map<String, dynamic> toMap() {
-    return {"id": _id, "name": _name};
-  }
-
-  static List<ErrorCode> getValues() => List.from(_values);
 }
 
 class Msg {
@@ -1792,17 +1622,17 @@ class PrinterStatus {
   int labelId;
   int labelType;
 
-  PrinterStatus(
-      {Uint8List? statusBytes,
-      this.errorCode = ErrorCode.ERROR_NONE,
-      this.labelId = -1,
-      this.labelType = -1,
-      this.isACConnected = BatteryTernary.Unknown,
-      this.isBatteryMounted = BatteryTernary.Unknown,
-      this.batteryLevel = -1,
-      this.batteryResidualQuantityLevel = -1,
-      this.maxOfBatteryResidualQuantityLevel = -1})
-      : this._statusBytes =
+  PrinterStatus({
+    Uint8List? statusBytes,
+    this.errorCode = ErrorCode.noError,
+    this.labelId = -1,
+    this.labelType = -1,
+    this.isACConnected = BatteryTernary.Unknown,
+    this.isBatteryMounted = BatteryTernary.Unknown,
+    this.batteryLevel = -1,
+    this.batteryResidualQuantityLevel = -1,
+    this.maxOfBatteryResidualQuantityLevel = -1,
+  }) : this._statusBytes =
             statusBytes == null ? new Uint8List(32) : statusBytes;
 
   ErrorCode getLastError() {
@@ -1810,17 +1640,20 @@ class PrinterStatus {
   }
 
   static PrinterStatus fromMap(Map<dynamic, dynamic> map) {
+    debugPrint('yt/ errorCode=${map['errorCode']}');
+
     return PrinterStatus(
-        statusBytes: map["statusBytes"],
-        errorCode: ErrorCode.fromMap(map["errorCode"]),
-        labelId: map["labelId"],
-        labelType: map["labelType"],
-        isACConnected: BatteryTernary.fromMap(map["isACConnected"]),
-        isBatteryMounted: BatteryTernary.fromMap(map["isBatteryMounted"]),
-        batteryLevel: map["batteryLevel"],
-        batteryResidualQuantityLevel: map["batteryResidualQuantityLevel"],
-        maxOfBatteryResidualQuantityLevel:
-            map["maxOfBatteryResidualQuantityLevel"]);
+      statusBytes: map["statusBytes"],
+      errorCode: ErrorCode.fromCode(map["errorCode"]?["name"]),
+      labelId: map["labelId"],
+      labelType: map["labelType"],
+      isACConnected: BatteryTernary.fromMap(map["isACConnected"]),
+      isBatteryMounted: BatteryTernary.fromMap(map["isBatteryMounted"]),
+      batteryLevel: map["batteryLevel"],
+      batteryResidualQuantityLevel: map["batteryResidualQuantityLevel"],
+      maxOfBatteryResidualQuantityLevel:
+          map["maxOfBatteryResidualQuantityLevel"],
+    );
   }
 
   Map<String, dynamic> toMap() {
@@ -1850,13 +1683,14 @@ class TimeoutSetting {
   int connectionWaitMSec = 500;
   int closeWaitDisusingStatusCheckSec = 3;
 
-  TimeoutSetting(
-      {this.processTimeoutSec = -1,
-      this.sendTimeoutSec = 90,
-      this.receiveTimeoutSec = 180,
-      this.closeWaitMSec = 500,
-      this.connectionWaitMSec = 500,
-      this.closeWaitDisusingStatusCheckSec = 3});
+  TimeoutSetting({
+    this.processTimeoutSec = -1,
+    this.sendTimeoutSec = 90,
+    this.receiveTimeoutSec = 180,
+    this.closeWaitMSec = 500,
+    this.connectionWaitMSec = 500,
+    this.closeWaitDisusingStatusCheckSec = 3,
+  });
 
   static TimeoutSetting fromMap(Map<dynamic, dynamic> map) {
     return TimeoutSetting(
@@ -2709,7 +2543,7 @@ class Printer {
   Future<PrinterStatus> printImage(Image image) async {
     var imageBytes = await image.toByteData(format: ImageByteFormat.png);
     if (imageBytes == null) {
-      return PrinterStatus(errorCode: ErrorCode.ERROR_UNSUPPORTED_MEDIA);
+      return PrinterStatus(errorCode: ErrorCode.unsupportedFile);
     }
 
     var outByteArray = Uint8List(imageBytes.lengthInBytes);
