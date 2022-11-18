@@ -41,29 +41,28 @@ class CancelMethodCall(
                 dartPrintInfo["macAddress"] as String,
                 BluetoothAdapter.getDefaultAdapter(),
             )
+
             val generatorResult = PrinterDriverGenerator.openChannel(channel)
 
             if (generatorResult.error.code != OpenChannelError.ErrorCode.NoError) {
                 // There was an error notify
                 withContext(Dispatchers.Main) {
                     // Set result Printer status.
-                    result.success(v4PrinterStatusMap(error = PrintError.ErrorCode.PrinterStatusErrorCommunicationError))
+                    result.success(false)
                 }
                 return@launch
             }
 
-            val driver = generatorResult.driver
-            val error =
-                try {
-                    driver.cancelPrinting()
-                    PrintError.ErrorCode.NoError
-                } catch (e: Exception) {
-                    Log.e("another-brother", "Print image error: ", e);
-                    PrintError.ErrorCode.UnknownError
+            try {
+                generatorResult.driver.cancelPrinting()
+                withContext(Dispatchers.Main) {
+                    result.success(true)
                 }
-
-            withContext(Dispatchers.Main) {
-                result.success(v4PrinterStatusMap(error))
+            } catch (e: Exception) {
+                Log.e("another-brother", "Print image error: ", e);
+                withContext(Dispatchers.Main) {
+                    result.success(false)
+                }
             }
         }
     }

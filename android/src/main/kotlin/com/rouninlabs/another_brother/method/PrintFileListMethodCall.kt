@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.brother.sdk.lmprinter.Channel
 import com.brother.sdk.lmprinter.OpenChannelError
-import com.brother.sdk.lmprinter.PrintError
+import com.brother.sdk.lmprinter.PrintError.ErrorCode
 import com.brother.sdk.lmprinter.PrinterDriverGenerator
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -34,43 +34,60 @@ class PrintFileListMethodCall(
 
         GlobalScope.launch(Dispatchers.IO) {
 
-            val dartPrintInfo: HashMap<String, Any> =
-                call.argument<HashMap<String, Any>>("printInfo")!!
-            val filePathList: List<String> = call.argument("filePathList")!!
+            try {
 
-            // Decoded Printer Info
-            val printSettings = v4PrintSettingsFromMap(context = context, map = dartPrintInfo)
+                val dartPrintInfo: HashMap<String, Any> =
+                    call.argument<HashMap<String, Any>>("printInfo")!!
+                val filePathList: List<String> = call.argument("filePathList")!!
 
-            val channel = Channel.newBluetoothChannel(
-                dartPrintInfo["macAddress"] as String,
-                BluetoothAdapter.getDefaultAdapter(),
-            )
-            val generatorResult = PrinterDriverGenerator.openChannel(channel)
+                // Decoded Printer Info
+                val printSettings = v4PrintSettingsFromMap(context = context, map = dartPrintInfo)
 
-            if (generatorResult.error.code != OpenChannelError.ErrorCode.NoError) {
-                // There was an error notify
+                val channel = Channel.newBluetoothChannel(
+                    dartPrintInfo["macAddress"] as String,
+                    BluetoothAdapter.getDefaultAdapter(),
+                )
+                val generatorResult = PrinterDriverGenerator.openChannel(channel)
+
+                if (generatorResult.error.code != OpenChannelError.ErrorCode.NoError) {
+                    // There was an error notify
+                    withContext(Dispatchers.Main) {
+                        // Set result Printer status.
+                        result.success(
+                            v4PrinterStatusMap(
+                                error = when (generatorResult.error.code) {
+                                    OpenChannelError.ErrorCode.NoError -> ErrorCode.NoError
+                                    OpenChannelError.ErrorCode.OpenStreamFailure -> ErrorCode.ChannelErrorStreamStatusError
+                                    OpenChannelError.ErrorCode.Timeout -> ErrorCode.ChannelTimeout
+                                    null -> ErrorCode.UnknownError
+                                },
+                            ),
+                        )
+                    }
+                    return@launch
+                }
+
+                val driver = generatorResult.driver
+                val error =
+                    try {
+                        driver.printImage(filePathList.toTypedArray(), printSettings).code
+                    } catch (e: Exception) {
+                        Log.e("another-brother", "Print image error: ", e);
+                        ErrorCode.UnknownError
+                    }
+
+                driver.closeChannel()
+
                 withContext(Dispatchers.Main) {
-                    // Set result Printer status.
-                    result.success(v4PrinterStatusMap(error = PrintError.ErrorCode.PrinterStatusErrorCommunicationError))
+                    result.success(v4PrinterStatusMap(error))
                 }
-                return@launch
-            }
-
-            val driver = generatorResult.driver
-            val error =
-                try {
-                    driver.printImage(filePathList.toTypedArray(), printSettings).code
-                } catch (e: Exception) {
-                    Log.e("another-brother", "Print image error: ", e);
-                    PrintError.ErrorCode.UnknownError
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    result.success(v4PrinterStatusMap(ErrorCode.UnknownError))
                 }
+            } finally {
 
-            driver.closeChannel()
-
-            withContext(Dispatchers.Main) {
-                result.success(v4PrinterStatusMap(error))
             }
         }
-
     }
 }

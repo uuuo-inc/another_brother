@@ -680,7 +680,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     printerSettings.labelSize = [BrotherUtils qlLabelSizeWithName:labelName];
     printerSettings.autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
-    printerSettings.cutAtEnd = [[map objectForKey:@"isEndCut"] isEqual:@(YES)];
+    printerSettings.cutAtEnd = [[map objectForKey:@"isCutAtEnd"] isEqual:@(YES)];
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartPrintQuality];
     printerSettings.autoCutForEachPageCount = (NSUInteger)[(NSNumber *)[map objectForKey:@"autoCutForEachPageCount"] integerValue];
     // TODO Extract info from map.
@@ -1183,7 +1183,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     NSNumber * dartRjDensity = (NSNumber *) [map objectForKey:@"rjDensity"];
     
-    bool peelLabel = [[map objectForKey:@"peelMode"]isEqual:@(YES)];
+    bool peelLabel = [(NSNumber *)[map objectForKey:@"peelMode"] boolValue];
     
     BRLMTDPrintSettings * printerSettings = [[BRLMTDPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
     
@@ -1215,9 +1215,8 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     NSDictionary<NSString*, NSObject*> * dartValign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"valign"];
     
     printerSettings.vAlignment = [BrotherUtils vAlignFromMapWithValue:dartValign];
-
     
-    if ([[map objectForKey:@"mode9"] isEqual:@(YES)]) {
+    if ([(NSNumber *)[map objectForKey:@"mode9"] boolValue]) {
         printerSettings.compress = BRLMPrintSettingsCompressModeMode9;
     }
     else {
@@ -1228,16 +1227,22 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     
     printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
     
-    printerSettings.skipStatusCheck = [[map objectForKey:@"skipStatusCheck"] isEqual:@(YES)];
+    printerSettings.skipStatusCheck = [(NSNumber *)[map objectForKey:@"skipStatusCheck"] boolValue];
     
     NSDictionary<NSString*, NSObject*> * dartPrintQuality2 = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printQuality"];
     
     printerSettings.printQuality = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality2];
     
-    printerSettings.autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
+//    printerSettings.autoCut = [(NSNumber *)[map objectForKey:@"isAutoCut"] boolValue];
     
-    printerSettings.autoCutForEachPageCount = (NSUInteger)[(NSNumber *)[map objectForKey:@"autoCutForEachPageCount"] integerValue];
-        
+//    printerSettings.cutAtEnd = [(NSNumber *)[map objectForKey:@"isCutAtEnd"] boolValue];
+    
+//    printerSettings.autoCutForEachPageCount = (NSUInteger)[(NSNumber *)[map objectForKey:@"autoCutForEachPageCount"] integerValue];
+    
+    printerSettings.autoCut = YES;
+    printerSettings.cutAtEnd = YES;
+    printerSettings.autoCutForEachPageCount = 2;
+            
     // TODO Add extra configuration
     //[x]scaleMode @"printMode"(map)
     //[x]scaleValue @"scaleValue" (double)
