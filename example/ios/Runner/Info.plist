@@ -75,5 +75,7 @@
     		<string>com.brother.ptcbp</string>
     		<string>com.issc.datapath</string>
     	</array>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 </dict>
 </plist>
