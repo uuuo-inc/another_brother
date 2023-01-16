@@ -246,15 +246,15 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"RJ_3250WB" isEqualToString:name]) {
         return BRLMPrinterModelRJ_3250WB;
     }
-    
+
     return BRLMPrinterModelUnknown;
-    
+
 }
 
 + (BRLMPrintSettingsHalftone)halftoneFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString *)[map objectForKey:@"name"];
-    
+
     if ([@"THRESHOLD" isEqualToString:name]) {
         return BRLMPrintSettingsHalftoneThreshold;
     }
@@ -264,14 +264,14 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if ([@"ERRORDIFFUSION" isEqualToString:name]) {
         return BRLMPrintSettingsHalftoneErrorDiffusion;
     }
-    
+
     return BRLMPrintSettingsHalftoneErrorDiffusion;
-    
+
 }
 
 + (BRLMPrintSettingsHorizontalAlignment)alignFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
     NSString * name = (NSString * )[map objectForKey:@"name"];
-    
+
     if([@"LEFT" isEqualToString:name]) {
         return BRLMPrintSettingsHorizontalAlignmentLeft;
     }
@@ -281,14 +281,14 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"RIGHT" isEqualToString:name]) {
         return BRLMPrintSettingsHorizontalAlignmentRight;
     }
-    
+
     return BRLMPrintSettingsHorizontalAlignmentLeft;
 }
 
 + (BRLMPrintSettingsVerticalAlignment)vAlignFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString *) [map objectForKey:@"name"];
-    
+
     if([@"TOP" isEqualToString:name]) {
         return BRLMPrintSettingsVerticalAlignmentTop;
     }
@@ -298,30 +298,30 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"BOTTOM" isEqualToString:name]) {
         return BRLMPrintSettingsVerticalAlignmentBottom;
     }
-    
+
     return BRLMPrintSettingsVerticalAlignmentTop;
-    
+
 }
 
 + (BRLMPrintSettingsOrientation)orientationFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString *) [map objectForKey:@"name"];
-    
+
     if ([@"PORTRAIT" isEqualToString:name]) {
         return BRLMPrintSettingsOrientationPortrait;
     }
     else if ([@"LANDSCAPE" isEqualToString:name]) {
         return BRLMPrintSettingsOrientationLandscape;
     }
-    
+
     return BRLMPrintSettingsOrientationPortrait;
 }
 
 
 + (BRLMPrintSettingsResolution)printResolutionFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString *)[map objectForKey:@"name"];
-    
+
     if ([@"LOW_RESOLUTION" isEqualToString:name]) {
         return BRLMPrintSettingsResolutionLow;
     }
@@ -334,13 +334,13 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if ([@"HIGH_RESOLUTION" isEqualToString:name]) {
         return BRLMPrintSettingsResolutionHigh;
     }
-    
+
     return BRLMPrintSettingsResolutionNormal;
 }
 
 + (BRLMPrintSettingsPrintQuality)printQualityFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
     NSString * name = (NSString *)[map objectForKey:@"name"];
-    
+
     if ([@"LOW_RESOLUTION" isEqualToString:name]) {
         return BRLMPrintSettingsPrintQualityFast;
     }
@@ -353,15 +353,15 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if ([@"HIGH_RESOLUTION" isEqualToString:name]) {
         return BRLMPrintSettingsPrintQualityBest;
     }
-    
+
     return BRLMPrintSettingsPrintQualityBest;
-    
+
 }
 
 + (BRLMPrintSettingsScaleMode)printModeFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString *)[map objectForKey:@"name"];
-    
+
     if([@"ORIGINAL" isEqualToString:name]) {
         return BRLMPrintSettingsScaleModeActualSize;
     }
@@ -374,14 +374,14 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if([@"FIT_TO_PAPER" isEqualToString:name]) {
         return BRLMPrintSettingsScaleModeFitPaperAspect;
     }
-    
+
     return BRLMPrintSettingsScaleModeActualSize;
 }
 
 + (BRLMCustomPaperSizePaperKind)paperKindFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString *) [map objectForKey:@"name"];
-    
+
     if ([@"ROLL" isEqualToString:name]) {
         return BRLMCustomPaperSizePaperKindRoll;
     }
@@ -391,31 +391,31 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if ([@"MARKED_ROLL" isEqualToString:name]) {
         return BRLMCustomPaperSizePaperKindMarkRoll;
     }
-    
+
     return BRLMCustomPaperSizePaperKindRoll;
 }
 
 + (BRLMCustomPaperSizeLengthUnit)unitFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString*) [map objectForKey:@"name"];
-    
+
     if ([@"Inch" isEqualToString: name]) {
         return BRLMCustomPaperSizeLengthUnitInch;
     }
     else if ([@"Mm" isEqualToString: name]) {
         return BRLMCustomPaperSizeLengthUnitMm;
     }
-    
+
     return BRLMCustomPaperSizeLengthUnitInch;
 }
 
 + (BRLMCustomPaperSizeMargins)customMarginFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     CGFloat topMargin = [(NSNumber *)[map objectForKey:@"topMargin"] doubleValue];
     CGFloat bottomMargin = [(NSNumber *)[map objectForKey:@"bottomMargin"] doubleValue];
     CGFloat leftMargin = [(NSNumber *)[map objectForKey:@"leftMargin"] doubleValue];
     CGFloat rightMargin = [(NSNumber *)[map objectForKey:@"rightMargin"] doubleValue];
-    
+
     return BRLMCustomPaperSizeMarginsMake(
                                         topMargin,
                                           leftMargin,
@@ -424,49 +424,49 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
 }
 
 + (BRLMCustomPaperSize *)customPaperInfoFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map binCustomPaperMap:(NSDictionary<NSString *, NSObject *> *)binCustomPaperMap{
-    
+
     if (![binCustomPaperMap isEqual:[NSNull null]]) {
         // TODO Get Asset key
         NSString * assetFile = (NSString *)[binCustomPaperMap objectForKey:@"assetPath"];
         NSString* key = [[BrotherUtils registrarFlutter] lookupKeyForAsset:assetFile];
         NSString* path = [[NSBundle mainBundle] pathForResource:key ofType:nil];
-        
+
         NSURL * customPaperFileUrl = [NSURL fileURLWithPath:path];
-        
+
         BRLMCustomPaperSize *customPaperSize = [[BRLMCustomPaperSize alloc] initWithFile:customPaperFileUrl];
         return customPaperSize;
-            
+
     }
-    
+
     if ([map isEqual:[NSNull null]] ) {
         // No bin file or custom paper was passed.
         return NULL;
     }
-    
+
     NSDictionary<NSString*, NSObject *> * dartPaperKind = (NSDictionary<NSString*, NSObject *> *)[map objectForKey:@"paperKind"];
-    
+
     BRLMCustomPaperSizePaperKind paperKind = [BrotherUtils paperKindFromMapWithValue:dartPaperKind];
-    
+
     NSDictionary<NSString*, NSObject *> * dartUnit = (NSDictionary<NSString*, NSObject *> *)[map objectForKey:@"unit"];
-    
+
     BRLMCustomPaperSizeLengthUnit unit = [BrotherUtils unitFromMapWithValue: dartUnit];
-    
+
     BRLMCustomPaperSizeMargins margins = [BrotherUtils customMarginFromMapWithValue:map];
-    
+
     float tapeWidth = [(NSNumber *)[map objectForKey:@"tapeWidth"] doubleValue];
     float tapeLength = [(NSNumber *)[map objectForKey:@"tapeLength"] doubleValue];
     float markHeight = [(NSNumber *)[map objectForKey:@"markHeight"] doubleValue];
     float gapLength = [(NSNumber *)[map objectForKey:@"labelPitch"] doubleValue];
     float markPosition = [(NSNumber *)[map objectForKey:@"markPosition"] doubleValue];
-    
-    
+
+
     if (paperKind == BRLMCustomPaperSizePaperKindDieCut) {
         return [[BRLMCustomPaperSize alloc] initDieCutWithTapeWidth:tapeWidth tapeLength:tapeLength margins:margins gapLength:gapLength unitOfLength:unit];
     }
     else if (paperKind == BRLMCustomPaperSizePaperKindByFile) {
         // Note: This is handled with the asset files as the start of the method.
         //[[BRLMCustomPaperSize alloc] initWithFile:<#(nonnull NSURL *)#>]
-        
+
     }
     else if (paperKind == BRLMCustomPaperSizePaperKindMarkRoll) {
         return [[BRLMCustomPaperSize alloc] initMarkRollWithTapeWidth:tapeWidth tapeLength:tapeLength margins:margins markPosition:markPosition markHeight:markHeight unitOfLength:unit];
@@ -474,14 +474,14 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if (paperKind == BRLMCustomPaperSizePaperKindRoll) {
         return [[BRLMCustomPaperSize alloc] initRollWithTapeWidth:tapeWidth margins:margins unitOfLength:unit];
     }
-    
+
     return [[BRLMCustomPaperSize alloc] initRollWithTapeWidth:tapeWidth margins:margins unitOfLength:unit];
 }
 
 + (BRLMPrinterModel) printerModelFromPrinterInfoMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSDictionary<NSString *,NSObject *> * dartPrinterModel = (NSDictionary<NSString *,NSObject *> *) [map objectForKey:@"printerModel"];
-    
+
     return [BrotherUtils modelFromMapWithValue:dartPrinterModel];
 }
 
@@ -498,17 +498,17 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     BRLMChannelType channelType = [BrotherUtils portFromMapWithValue:dartPort];
     // TODO From channel type create channel.
     BRLMChannel * outChannel;
-    
+
     NSString * ipAddress = (NSString *) [map objectForKey:@"ipAddress"];
     NSString * macAddress = (NSString *) [map objectForKey:@"macAddress"];
     NSString * localName = (NSString *) [map objectForKey:@"localName"];
-    
+
     if (channelType == BRLMChannelTypeWiFi) {
         outChannel = [[BRLMChannel alloc] initWithWifiIPAddress:ipAddress];
     }
     else if (channelType == BRLMChannelTypeBluetoothMFi) {
         outChannel = [[BRLMChannel alloc] initWithBluetoothSerialNumber:macAddress];
-        
+
     }
     else if (channelType == BRLMChannelTypeBluetoothLowEnergy) {
         outChannel = [[BRLMChannel alloc] initWithBLELocalName:localName];
@@ -516,7 +516,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else {
         outChannel = [[BRLMChannel alloc] initWithWifiIPAddress:ipAddress];
     }
-    
+
     return outChannel;
 }
 
@@ -611,7 +611,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
 }
 
 + (BRLMPTPrintSettingsLabelSize)ptLabelSizeWithName:(LabelName *)labelName {
-    
+
     if ([@"W3_5" isEqualToString:[labelName name]]) {
         return BRLMPTPrintSettingsLabelSizeWidth3_5mm;
     }
@@ -651,7 +651,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if ([@"FLE_W21H45" isEqualToString:[labelName name]]) {
         return BRLMPTPrintSettingsLabelSizeWidthFL_21x45mm;
     }
-    
+
     /*
       Note: These were not found in the iOS side.
          R6_5,
@@ -663,21 +663,21 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
          R2_5,
          UNSUPPORT
      */
-    
+
     return BRLMPTPrintSettingsLabelSizeWidth3_5mm;
 }
 
 + (BRLMQLPrintSettings *) qlPrintSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map {
-    
+
     BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
-    
+
     NSDictionary<NSString*, NSObject*> * dartLabelName = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"labelName"];
     LabelName * labelName = [BrotherUtils labelNameFromMapWithValue:dartLabelName];
-    
+
     BRLMQLPrintSettings * printerSettings = [[BRLMQLPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
-    
+
     NSDictionary<NSString*, NSObject*> * dartPrintQuality = (NSDictionary<NSString*, NSObject*> *) [map objectForKey:@"printQuality"];
-    
+
     printerSettings.labelSize = [BrotherUtils qlLabelSizeWithName:labelName];
     printerSettings.autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
     printerSettings.cutAtEnd = [[map objectForKey:@"isCutAtEnd"] isEqual:@(YES)];
@@ -689,49 +689,49 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     //[x]autoCut
     //[x]cutAtEnd
     //[x]resolution
-    
-    
+
+
     NSDictionary<NSString*, NSObject*> * dartPrintMode = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printMode"];
-    
+
     printerSettings.scaleMode = [BrotherUtils printModeFromMapWithValue:dartPrintMode];
-    
+
     printerSettings.scaleValue = [(NSNumber *)[map objectForKey:@"scaleValue"] doubleValue];
-    
+
     NSDictionary<NSString*, NSObject*> * dartOrientation = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"orientation"];
-    
+
     printerSettings.printOrientation = [BrotherUtils orientationFromMapWithValue:dartOrientation];
-    
+
     NSDictionary<NSString*, NSObject*> * dartHalftone = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"halftone"];
-    
+
     printerSettings.halftone = [BrotherUtils halftoneFromMapWithValue:dartHalftone];
 
     NSDictionary<NSString*, NSObject*> * dartAlign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"align"];
 
     printerSettings.hAlignment = [BrotherUtils alignFromMapWithValue:dartAlign];
-    
+
     NSDictionary<NSString*, NSObject*> * dartValign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"valign"];
-    
+
     printerSettings.vAlignment = [BrotherUtils vAlignFromMapWithValue:dartValign];
 
-    
+
     if ([[map objectForKey:@"mode9"] isEqual:@(YES)]) {
         printerSettings.compress = BRLMPrintSettingsCompressModeMode9;
     }
     else {
         printerSettings.compress = BRLMPrintSettingsCompressModeNone;
     }
-    
+
     printerSettings.halftoneThreshold = [(NSNumber *)[map objectForKey:@"thresholdingValue"] intValue];
-    
-    
+
+
     printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
-    
+
     printerSettings.skipStatusCheck = [[map objectForKey:@"skipStatusCheck"] isEqual:@(YES)];
-    
+
     NSDictionary<NSString*, NSObject*> * dartPrintQuality2 = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printQuality"];
-    
+
     printerSettings.printQuality = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality2];
-    
+
     // TODO Add extra configuration
     //[x]scaleMode @"printMode"(map)
     //[x]scaleValue @"scaleValue" (double)
@@ -744,7 +744,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     //[x]numCopies @"numberOfCopies" (int)
     //[x]skipStatusCheck @"skipStatusCheck" (@YES/@NO type)
     //printQuality @"printQuality" (map)
-    
+
     return printerSettings;
 }
 
@@ -782,73 +782,73 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if ([density isEqualToNumber:@10]) {
         return BRLMRJPrintSettingsDensityStrongLevel5;
     }
-    
+
     return BRLMRJPrintSettingsDensityNeutral;
 }
 
 + (BRLMRJPrintSettings *)rjPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
-    
-     
+
+
     NSDictionary<NSString*, NSObject*> * dartBinCustomPaperMap = (NSDictionary<NSString*, NSObject*> *) [map objectForKey:@"binCustomPaper"];
-    
+
     NSDictionary<NSString*, NSObject*> * dartCustomPaperInfo = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"customPaperInfo"];
-    
+
     BRLMCustomPaperSize * customPaperSize = [BrotherUtils customPaperInfoFromMapWithValue:dartCustomPaperInfo binCustomPaperMap:dartBinCustomPaperMap];
-    
+
     BRLMRJPrintSettings * printerSettings = [[BRLMRJPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
-    
+
     NSNumber * density = (NSNumber *)[map objectForKey:@"rjDensity"];
-    
+
     printerSettings.density = [BrotherUtils rjPrintDensityWithValue:density];
     printerSettings.rotate180degrees = [[map objectForKey:@"rotate180"] isEqual:@(YES)];
     printerSettings.peelLabel = [[map objectForKey:@"peelMode"]isEqual:@(YES)];
     printerSettings.customPaperSize = customPaperSize;
-    
-    
+
+
     //customPaperSize "customPaperInfo" TODO
-    
+
     NSDictionary<NSString*, NSObject*> * dartPrintMode = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printMode"];
-    
+
     printerSettings.scaleMode = [BrotherUtils printModeFromMapWithValue:dartPrintMode];
-    
+
     printerSettings.scaleValue = [(NSNumber *)[map objectForKey:@"scaleValue"] doubleValue];
-    
+
     NSDictionary<NSString*, NSObject*> * dartOrientation = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"orientation"];
-    
+
     printerSettings.printOrientation = [BrotherUtils orientationFromMapWithValue:dartOrientation];
-    
+
     NSDictionary<NSString*, NSObject*> * dartHalftone = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"halftone"];
-    
+
     printerSettings.halftone = [BrotherUtils halftoneFromMapWithValue:dartHalftone];
 
     NSDictionary<NSString*, NSObject*> * dartAlign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"align"];
 
     printerSettings.hAlignment = [BrotherUtils alignFromMapWithValue:dartAlign];
-    
+
     NSDictionary<NSString*, NSObject*> * dartValign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"valign"];
-    
+
     printerSettings.vAlignment = [BrotherUtils vAlignFromMapWithValue:dartValign];
 
-    
+
     if ([[map objectForKey:@"mode9"] isEqual:@(YES)]) {
         printerSettings.compress = BRLMPrintSettingsCompressModeMode9;
     }
     else {
         printerSettings.compress = BRLMPrintSettingsCompressModeNone;
     }
-    
+
     printerSettings.halftoneThreshold = [(NSNumber *)[map objectForKey:@"thresholdingValue"] intValue];
-    
+
     printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
-    
+
     printerSettings.skipStatusCheck = [[map objectForKey:@"skipStatusCheck"] isEqual:@(YES)];
-    
+
     NSDictionary<NSString*, NSObject*> * dartPrintQuality2 = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printQuality"];
-    
+
     printerSettings.printQuality = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality2];
-    
+
     // TODO Add extra configuration
     //[x]scaleMode @"printMode"(map)
     //[x]scaleValue @"scaleValue" (double)
@@ -861,7 +861,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     //[x]numCopies @"numberOfCopies" (int)
     //[x]skipStatusCheck @"skipStatusCheck" (@YES/@NO type)
     //printQuality @"printQuality" (map)
-    
+
     return printerSettings;
 }
 
@@ -899,15 +899,15 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if ([density isEqualToNumber:@10]) {
         return BRLMPJPrintSettingsDensityStrongLevel5;
     }
-    
+
     return BRLMPJPrintSettingsDensityNeutral;
 }
 
 
 + (BRLMPJPrintSettingsPaperSizeStandard) pjPaperSizeStandardFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString *)[map objectForKey:@"name"];
-    
+
     if ([@"CUSTOM" isEqualToString:name]) {
         return BRLMPJPrintSettingsPaperSizeStandardCustom;
     }
@@ -929,43 +929,43 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if  ([@"LETTER" isEqualToString:name]) {
         return BRLMPJPrintSettingsPaperSizeStandardLetter;
     }
-    
+
     else return BRLMPJPrintSettingsPaperSizeStandardA4;
 }
 
 + (BRLMPJPrintSettingsPaperSize *)pjPrinterPaperSizeFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSDictionary<NSString *, NSObject*> * dartStandardSize = (NSDictionary<NSString *, NSObject *>*) [map objectForKey:@"paperSize"];
-    
+
     //paperSizeStandard
     BRLMPJPrintSettingsPaperSizeStandard standardPaperSize = [BrotherUtils pjPaperSizeStandardFromMapWithValue:dartStandardSize];
-    
+
     //customPaper
     // TODO Support Custom size, need to send paper in.
-    
+
     return [[BRLMPJPrintSettingsPaperSize alloc] initWithPaperSizeStandard:standardPaperSize];
-    
+
 }
 
 + (BRLMPJPrintSettingsPaperType)pjPaperKindFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString *)[map objectForKey:@"name"];
-    
+
     if ([@"PJ_ROLL" isEqualToString:name]) {
         return BRLMPJPrintSettingsPaperTypeRoll;
     }
     else if ([@"PJ_CUT_PAPER" isEqualToString:name]) {
         return BRLMPJPrintSettingsPaperTypeCutSheet;
     }
-    
+
     return BRLMPJPrintSettingsPaperTypeCutSheet;
 
 }
 
 + (BRLMPJPrintSettingsRollCase)pjRollCaseFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString *)[map objectForKey:@"name"];
-    
+
     if ([@"PJ_ROLLCASE_OFF" isEqualToString:name]) {
         return BRLMPJPrintSettingsRollCaseNone;
     }
@@ -975,15 +975,15 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if ([@"PJ_ROLLCASE_WITH_ANTICURL" isEqualToString:name]) {
         return BRLMPJPrintSettingsRollCasePARC001_NoAntiCurl;
     }
-    
+
     return BRLMPJPrintSettingsRollCaseNone;
-    
+
 }
 
 + (BRLMPJPrintSettingsFeedMode)pjFeedModeFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString *)[map objectForKey:@"name"];
-    
+
     if ([@"PJ_FEED_MODE_FREE" isEqualToString:name]) {
         return BRLMPJPrintSettingsFeedModeNoFeed;
     }
@@ -996,12 +996,12 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if ([@"PJ_FEED_MODE_ENDOFPAGERETRACT" isEqualToString:name]) {
         return BRLMPJPrintSettingsFeedModeEndOfPageRetract;
     }
-    
+
     return BRLMPJPrintSettingsFeedModeFixedPage;
 }
 
 + (BRLMPJPrintSettingsPrintSpeed)pjPrintSpeedWithValue:(NSNumber *)pjSpeed {
-    
+
     if ([pjSpeed isEqualToNumber: @0]) {
         return BRLMPJPrintSettingsPrintSpeed2_5inchPerSec;
     }
@@ -1014,14 +1014,14 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if ([pjSpeed isEqualToNumber:@3]) {
         return BRLMPJPrintSettingsPrintSpeed1_1inchPerSec;
     }
-    
+
     return BRLMPJPrintSettingsPrintSpeed1_6inchPerSec;
 }
 
 + (BRLMPJPrintSettingsPaperInsertionPosition) pjPaperPositionFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString *)[map objectForKey:@"name"];
-    
+
     if ([@"LEFT" isEqualToString:name]) {
         return BRLMPJPrintSettingsPaperInsertionPositionLeft;
     }
@@ -1031,92 +1031,92 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if ([@"RIGHT" isEqualToString:name]) {
         return BRLMPJPrintSettingsPaperInsertionPositionRight;
     }
-    
+
     return BRLMPJPrintSettingsPaperInsertionPositionLeft;
 }
 
 + (BRLMPJPrintSettings *)pjPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
-    
+
+
     BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
-    
+
     BRLMPJPrintSettings * printerSettings = [[BRLMPJPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
-    
-    
+
+
     NSDictionary<NSString *, NSObject *> * dartPaperKind = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"pjPaperKind"];
-    
+
     NSDictionary<NSString *, NSObject *> * dartPjFeedMode = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"pjFeedMode"];
-    
+
     NSNumber * dartPjDensity = (NSNumber *) [map objectForKey:@"pjDensity"];
-    
+
     NSDictionary<NSString *, NSObject *> * dartPjRollCase = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"rollPrinterCase"];
-    
+
     NSDictionary<NSString *, NSObject *> * dartPaperPosition = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"paperPosition"];
-    
+
     NSNumber * dartPjSpeed = (NSNumber *) [map objectForKey:@"pjSpeed"];
-    
+
     bool dashLine = [[map objectForKey:@"dashLine"] isEqual:@(YES)];
-    
+
     printerSettings.paperSize = [BrotherUtils pjPrinterPaperSizeFromMapWithValue:map];
-    
-    
+
+
     printerSettings.paperType = [BrotherUtils pjPaperKindFromMapWithValue:dartPaperKind];
-    
+
     printerSettings.paperInsertionPosition = [BrotherUtils pjPaperPositionFromMapWithValue:dartPaperPosition];
-    
+
     printerSettings.feedMode = [BrotherUtils pjFeedModeFromMapWithValue:dartPjFeedMode];
-    
+
     printerSettings.density = [BrotherUtils pjPrintDensityWithValue:dartPjDensity];
-    
+
     printerSettings.rollCase = [BrotherUtils pjRollCaseFromMapWithValue:dartPjRollCase];
-    
+
     printerSettings.printSpeed = [BrotherUtils pjPrintSpeedWithValue:dartPjSpeed];
-    
-    
+
+
     printerSettings.usingCarbonCopyPaper = [[map objectForKey:@"pjCarbon"] isEqual:@(YES)];
-    
+
     printerSettings.printDashLine = dashLine;
-    
+
     NSDictionary<NSString*, NSObject*> * dartPrintMode = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printMode"];
-    
+
     printerSettings.scaleMode = [BrotherUtils printModeFromMapWithValue:dartPrintMode];
-    
+
     printerSettings.scaleValue = [(NSNumber *)[map objectForKey:@"scaleValue"] doubleValue];
-    
+
     NSDictionary<NSString*, NSObject*> * dartOrientation = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"orientation"];
-    
+
     printerSettings.printOrientation = [BrotherUtils orientationFromMapWithValue:dartOrientation];
-    
+
     NSDictionary<NSString*, NSObject*> * dartHalftone = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"halftone"];
-    
+
     printerSettings.halftone = [BrotherUtils halftoneFromMapWithValue:dartHalftone];
 
     NSDictionary<NSString*, NSObject*> * dartAlign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"align"];
 
     printerSettings.hAlignment = [BrotherUtils alignFromMapWithValue:dartAlign];
-    
+
     NSDictionary<NSString*, NSObject*> * dartValign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"valign"];
-    
+
     printerSettings.vAlignment = [BrotherUtils vAlignFromMapWithValue:dartValign];
 
-    
+
     if ([[map objectForKey:@"mode9"] isEqual:@(YES)]) {
         printerSettings.compress = BRLMPrintSettingsCompressModeMode9;
     }
     else {
         printerSettings.compress = BRLMPrintSettingsCompressModeNone;
     }
-    
+
     printerSettings.halftoneThreshold = [(NSNumber *)[map objectForKey:@"thresholdingValue"] intValue];
-    
+
     printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
-    
+
     printerSettings.skipStatusCheck = [[map objectForKey:@"skipStatusCheck"] isEqual:@(YES)];
-    
+
     NSDictionary<NSString*, NSObject*> * dartPrintQuality2 = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printQuality"];
-    
+
     printerSettings.printQuality = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality2];
-    
+
     // TODO Add extra configuration
     //[x]scaleMode @"printMode"(map)
     //[x]scaleValue @"scaleValue" (double)
@@ -1129,13 +1129,13 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     //[x]numCopies @"numberOfCopies" (int)
     //[x]skipStatusCheck @"skipStatusCheck" (@YES/@NO type)
     //printQuality @"printQuality" (map)
-    
+
     return printerSettings;
 }
 
 
 + (BRLMTDPrintSettingsDensity)tdPrintDensityWithValue:(NSNumber *)density {
-    
+
     if ([density isEqualToNumber:@0]) {
         return BRLMTDPrintSettingsDensityWeakLevel5;
     }
@@ -1169,80 +1169,80 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     else if ([density isEqualToNumber:@10]) {
         return BRLMTDPrintSettingsDensityStrongLevel5;
     }
-    
+
     return BRLMTDPrintSettingsDensityNeutral;
 }
 
 + (BRLMTDPrintSettings *)tdPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     //NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
-    
+
     BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
-    
+
     NSDictionary<NSString *, NSObject *> * dartCustomPaperInfo = (NSDictionary<NSString *, NSObject *> *) [map objectForKey:@"customPaperInfo"];
-    
+
     NSNumber * dartRjDensity = (NSNumber *) [map objectForKey:@"rjDensity"];
-    
+
     bool peelLabel = [(NSNumber *)[map objectForKey:@"peelMode"] boolValue];
-    
+
     BRLMTDPrintSettings * printerSettings = [[BRLMTDPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
-    
+
     NSDictionary<NSString*, NSObject*> * dartBinCustomPaperMap = (NSDictionary<NSString*, NSObject*> *) [map objectForKey:@"binCustomPaper"];
-    
+
     printerSettings.customPaperSize = [BrotherUtils customPaperInfoFromMapWithValue:dartCustomPaperInfo binCustomPaperMap:dartBinCustomPaperMap];
-    
+
     printerSettings.density = [BrotherUtils tdPrintDensityWithValue:dartRjDensity];
     printerSettings.peelLabel = peelLabel;
-    
+
     NSDictionary<NSString*, NSObject*> * dartPrintMode = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printMode"];
-    
+
     printerSettings.scaleMode = [BrotherUtils printModeFromMapWithValue:dartPrintMode];
-    
+
     printerSettings.scaleValue = [(NSNumber *)[map objectForKey:@"scaleValue"] doubleValue];
-    
+
     NSDictionary<NSString*, NSObject*> * dartOrientation = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"orientation"];
-    
+
     printerSettings.printOrientation = [BrotherUtils orientationFromMapWithValue:dartOrientation];
-    
+
     NSDictionary<NSString*, NSObject*> * dartHalftone = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"halftone"];
-    
+
     printerSettings.halftone = [BrotherUtils halftoneFromMapWithValue:dartHalftone];
 
     NSDictionary<NSString*, NSObject*> * dartAlign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"align"];
 
     printerSettings.hAlignment = [BrotherUtils alignFromMapWithValue:dartAlign];
-    
+
     NSDictionary<NSString*, NSObject*> * dartValign = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"valign"];
-    
+
     printerSettings.vAlignment = [BrotherUtils vAlignFromMapWithValue:dartValign];
-    
+
     if ([(NSNumber *)[map objectForKey:@"mode9"] boolValue]) {
         printerSettings.compress = BRLMPrintSettingsCompressModeMode9;
     }
     else {
         printerSettings.compress = BRLMPrintSettingsCompressModeNone;
     }
-    
+
     printerSettings.halftoneThreshold = [(NSNumber *)[map objectForKey:@"thresholdingValue"] intValue];
-    
+
     printerSettings.numCopies = (NSUInteger)[(NSNumber *)[map objectForKey:@"numberOfCopies"] integerValue];
-    
+
     printerSettings.skipStatusCheck = [(NSNumber *)[map objectForKey:@"skipStatusCheck"] boolValue];
-    
+
     NSDictionary<NSString*, NSObject*> * dartPrintQuality2 = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printQuality"];
-    
+
     printerSettings.printQuality = [BrotherUtils printQualityFromMapWithValue:dartPrintQuality2];
-    
-//    printerSettings.autoCut = [(NSNumber *)[map objectForKey:@"isAutoCut"] boolValue];
-    
-//    printerSettings.cutAtEnd = [(NSNumber *)[map objectForKey:@"isCutAtEnd"] boolValue];
-    
-//    printerSettings.autoCutForEachPageCount = (NSUInteger)[(NSNumber *)[map objectForKey:@"autoCutForEachPageCount"] integerValue];
-    
-    printerSettings.autoCut = YES;
-    printerSettings.cutAtEnd = YES;
-    printerSettings.autoCutForEachPageCount = 2;
-            
+
+   printerSettings.autoCut = [(NSNumber *)[map objectForKey:@"isAutoCut"] boolValue];
+
+   printerSettings.cutAtEnd = [(NSNumber *)[map objectForKey:@"isCutAtEnd"] boolValue];
+
+   printerSettings.autoCutForEachPageCount = (NSUInteger)[(NSNumber *)[map objectForKey:@"autoCutForEachPageCount"] integerValue];
+
+    // printerSettings.autoCut = YES;
+    // printerSettings.cutAtEnd = YES;
+    // printerSettings.autoCutForEachPageCount = 2;
+
     // TODO Add extra configuration
     //[x]scaleMode @"printMode"(map)
     //[x]scaleValue @"scaleValue" (double)
@@ -1255,32 +1255,32 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     //[x]numCopies @"numberOfCopies" (int)
     //[x]skipStatusCheck @"skipStatusCheck" (@YES/@NO type)
     //printQuality @"printQuality" (map)
-    
+
     return printerSettings;
 }
 
 + (BRLMPTPrintSettings *)ptPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     //NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
-    
+
     BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
-    
+
     NSDictionary<NSString *, NSObject *> * dartLabelName = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"labelName"];
-    
+
     LabelName * labelName = [BrotherUtils labelNameFromMapWithValue:dartLabelName];
-    
+
     bool cutmarkPrint = [[map objectForKey:@"isCutMark"] isEqual:@(YES)];
     bool autoCut = [[map objectForKey:@"isAutoCut"] isEqual:@(YES)];
     bool halfCut = [[map objectForKey:@"isHalfCut"] isEqual:@(YES)];
     bool specialTapePrint = [[map objectForKey:@"isSpecialTape"] isEqual:@(YES)];
-    
+
     NSDictionary<NSString *, NSObject *> * dartResolution = (NSDictionary<NSString *, NSObject *> *)[map objectForKey:@"printQuality"];
-    
+
     bool forceVanishingMargin = [[map objectForKey:@"banishMargin"] isEqual:@(YES)];
-    
-    
+
+
     BRLMPTPrintSettings * printerSettings = [[BRLMPTPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
-    
+
     printerSettings.labelSize = [BrotherUtils ptLabelSizeWithName:labelName];
     printerSettings.cutmarkPrint = cutmarkPrint;
     printerSettings.autoCut = autoCut;
@@ -1288,51 +1288,51 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
     printerSettings.specialTapePrint = specialTapePrint;
     printerSettings.resolution = [BrotherUtils printResolutionFromMapWithValue:dartResolution];
     printerSettings.forceVanishingMargin = forceVanishingMargin;
-    
+
     // chainPrint @"???"
     // highResolutionPrint @"???"
     // autoCutForEachPageCount @"???"
     //
-    
+
     return printerSettings;
 }
 
 + (BRLMMWPrintSettingsPaperSize)mwPaperSizeFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     NSString * name = (NSString *)[map objectForKey:@"name"];
-    
+
     if  ([@"A7" isEqualToString:name]) {
         return BRLMMWPrintSettingsPaperSizeA7;
     }
     else if  ([@"A6" isEqualToString:name]) {
         return BRLMMWPrintSettingsPaperSizeA6;
     }
-    
-    
+
+
     else return BRLMMWPrintSettingsPaperSizeA6;
 }
- 
+
 + (BRLMMWPrintSettings *)mwPrintSettingsFromMapWithValue:(NSDictionary<NSString *,NSObject *> *)map {
-    
+
     //NSDictionary<NSString*, NSObject*> * dartPrintModel = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"printerModel"];
-    
+
     BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
-    
+
     NSDictionary<NSString*, NSObject*> * dartPaperSize = (NSDictionary<NSString*, NSObject*> *)[map objectForKey:@"paperSize"];
-    
-    
+
+
     BRLMMWPrintSettings * printerSettings = [[BRLMMWPrintSettings alloc] initDefaultPrintSettingsWithPrinterModel:printerModel];
-    
+
     // TODO Ask Brother Why this is read only, seems odd.
     //printerSettings.paperSize = [BrotherUtils mwPaperSizeFromMapWithValue:dartPaperSize];
-    
+
     return printerSettings;
 }
 
 + (id<BRLMPrintSettingsProtocol>) printSettingsFromMapWithValue:(NSDictionary<NSString *, NSObject *> *) map {
-    
+
     BRLMPrinterModel printerModel = [BrotherUtils printerModelFromPrinterInfoMapWithValue:map];
-    
+
     if (printerModel == BRLMPrinterModelQL_710W
         || printerModel == BRLMPrinterModelQL_720NW
         || printerModel == BRLMPrinterModelQL_810W
@@ -1390,13 +1390,13 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
              ) {
         return [BrotherUtils mwPrintSettingsFromMapWithValue:map];
     }
-    
+
     return [BrotherUtils qlPrintSettingsFromMapWithValue:map];
 }
 
 
 + (NSDictionary<NSString *,NSObject *> *)errorCodeToMapWithValue:(BRLMPrintErrorCode)error {
-    
+
     NSString * errorName = @"NoError";
     if (error == BRLMPrintErrorCodeNoError) {
         errorName = @"NoError";
@@ -1500,9 +1500,9 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
 }
 
 + (NSDictionary<NSString *,NSObject *> *)printerStatusToMapWithError:(BRLMPrintErrorCode)error status:(BRLMPrinterStatus *)status {
-    
+
     NSObject * dartError = [BrotherUtils errorCodeToMapWithValue: error];
-    
+
     // TODO Translate status if not nill
     NSDictionary<NSString*, NSObject *> * dartPrintStatus = @{
         @"errorCode":dartError,
@@ -1514,12 +1514,12 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
         @"batteryResidualQuantityLevel":[[NSNumber alloc] initWithInt:(-1)], // TODO
         @"maxOfBatteryResidualQuantityLevel":[[NSNumber alloc] initWithInt:(-1)], // TODO
     };
-    
+
     return dartPrintStatus;
 }
 
 + (NSDictionary<NSString *,NSObject *> *)bRPtouchDeviceInfoToNetPrinterMap:(BRPtouchDeviceInfo *)deviceInfo {
-    
+
     NSDictionary<NSString *, NSObject *> * dartNetPrinter = @{
         @"modelName": [deviceInfo strModelName],
               @"serNo": [deviceInfo strSerialNumber],
@@ -1528,51 +1528,51 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
               @"nodeName": [deviceInfo strNodeName],
               @"location": [deviceInfo strLocation]
     };
-    
+
     return dartNetPrinter;
 }
 
 + (NSDictionary<NSString *,NSObject *> *)bRPtouchDeviceInfoToBluetoothPrinterMap:(BRPtouchDeviceInfo *)deviceInfo {
-    
+
     NSDictionary<NSString *, NSObject *> * dartPrinter = @{
         @"modelName": [deviceInfo strModelName],
               @"macAddress": [deviceInfo strSerialNumber],
-              
+
     };
-    
+
     return dartPrinter;
 }
 
 + (NSDictionary<NSString *,NSObject *> *)bRPtouchDeviceInfoToBlePrinterMap:(BRPtouchDeviceInfo *)deviceInfo {
-    
+
     NSDictionary<NSString *, NSObject *> * dartBlePrinter = @{
         @"localName": [deviceInfo strBLEAdvertiseLocalName]
     };
-    
+
     return dartBlePrinter;
 }
 
 
 + (NSDictionary<NSString *,NSObject *> *)cpPeripheralToBluetoothPrinterMap:(CBPeripheral *)peripheral {
-    
+
     NSDictionary<NSString *, NSObject *> * dartPrinter = @{
         @"modelName": [peripheral name],
               @"macAddress": [peripheral identifier],
-              
+
     };
-    
+
     return dartPrinter;
 }
 
 + (NSDictionary<NSString *,NSObject *> *)eaAccessoryToBluetoothPrinterMap:(EAAccessory *)accessory {
-    
-    
+
+
     NSDictionary<NSString *, NSObject *> * dartPrinter = @{
         @"modelName": [accessory name],
               @"macAddress": [accessory serialNumber]//[NSString stringWithFormat:@"%@",  @([accessory connectionID])]
-              
+
     };
-    
+
     return dartPrinter;
 }
 
@@ -1586,7 +1586,7 @@ static NSObject<FlutterPluginRegistrar>* _registrarFlutter;
         if (self) {
             _name = name;
             _model = model;
-            
+
         }
         return self;
 }
