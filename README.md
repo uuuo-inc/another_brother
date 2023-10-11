@@ -55,6 +55,15 @@ Also make sure to mark the libBROTHERSDK.a as belonging to another_brother in xC
 
 iOS Setup Video: https://www.youtube.com/watch?v=AcFnd-6hSew
 
+## Publishing to the Apple Store
+When submitting your application to the Apple store you'll need to obtain a PPID from Brother. This can be achieved by making a request here: https://secure6.brother.co.jp/mfi/Top.aspx
+
+Without it you'll likely receive a rejection message along the lines of:
+
+```
+App has not been authorized by the accessory manufacturer to work with the MFi accessory
+```
+
 
 
 ## Apps Built with another_brother
@@ -64,6 +73,9 @@ Have an app built using another_brother let me know and I will add it here!
 - QR Storage: https://play.google.com/store/apps/details?id=com.rouninlabs.qrstorage
 - Speed Dater: https://youtu.be/z4jxO9HWze8
 - 4.events: https://play.google.com/store/apps/details?id=com.fourevents.app
+- PoachMe.dev: https://poachme.dev/#/devLand?reqCode=SAVETIME&
+- OkosHACCP: https://play.google.com/store/apps/details?id=hu.okoshaccp.operator built by https://wunderbytes.eu/
+- ARMS Mobile: https://apps.apple.com/us/app/arms-mobile/id1615127530
 
 # Brother Hackathon
 Feel free to use any of my GitHub repositories in your apps. You should also consider

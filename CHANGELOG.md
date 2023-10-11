@@ -72,3 +72,41 @@
 
 ## 0.0.28
 - Resolves issue where app UI freezes while calling printImage on iOS.
+
+## 0.0.29
+- Upgrades Android libs to v4.6.1 of the Brother SDK.
+
+## 0.0.30
+- Adds support for getPDFFilePages on iOS.
+
+## 0.0.31
+- Adds orientation support for PT printers on iOS.
+
+## 0.0.32
+- Updates Bluetooth printer filter on Android.
+
+## 0.0.33
+- Updates USB permissions check for Android 13.
+
+## 0.0.34
+- Adds support for: RJ_3230B, RJ_3250WB, PT_D410, PT_D460BT, PT_D610BT, PJ_822, PJ_823, PJ_862, PJ_863, PJ_883, TD_2030A, TD_2125N, TD_2125NWB, TD_2135N, TD_2135NWB.
+- Adds bin papers for TD_2135NWB. Special thanks to Alain Deseine for the support with this.
+
+## 1.0.0
+- Updates iOS SDK to 4.6.4
+- Updates flutter_blue_plus to 1.12.13
+
+## 1.0.1
+- Adds bin papers for RJ-3230B and RJ-3250WB. Special thanks to Linus Lee for the support with this.
+
+## 1.0.2
+- Adds more bin papers for TD-2135NWB. Special thanks to Alain Deseine for the support with this.
+
+## 1.0.3
+- Fixes issue preventing printing on iOS using the TD-2125NWB and TD-2125NWB printer. 
+
+## 2.0.0
+- Updates AGP to version 7.3.0. 
+
+## 2.1.0
+- Adds bin papers for RJ-4030. Special thanks to Linus Lee for the support with this.
