@@ -180,6 +180,11 @@ typedef NS_ENUM(NSUInteger, CONNECTION_TYPE) {
     CONNECTION_TYPE_ERROR
 };
 
+typedef unsigned char BRPtouchPrinterInternalModelTypeFlag;
+extern const BRPtouchPrinterInternalModelTypeFlag BRPtouchPrinterInternalModelTypeFlagUnsupported; // Unsupported
+extern const BRPtouchPrinterInternalModelTypeFlag BRPtouchPrinterInternalModelTypeFlagCommunicationFailed; // CommunicationFailed
+
+
 extern NSString *BRWLanConnectBytesWrittenNotification;
 extern NSString *BRBluetoothSessionBytesWrittenNotification;
 extern NSString *BRBLEBytesWrittenNotification;
@@ -271,5 +276,7 @@ extern NSString *const BRMessageKey;
 
 - (int)setPrinterSettings:(NSDictionary*)printerSettings;
 - (int)getPrinterSettings:(NSDictionary**)printerSettings require:(NSArray*)require;
+
+- (BRPtouchPrinterInternalModelTypeFlag)getPrinterInternalModelFlag;
 
 @end

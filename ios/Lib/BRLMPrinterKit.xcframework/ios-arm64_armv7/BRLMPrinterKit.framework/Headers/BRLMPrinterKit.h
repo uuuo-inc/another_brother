@@ -16,9 +16,10 @@
 #import <BRLMPrinterKit/BRLMChannel.h>
 #import <BRLMPrinterKit/BRLMPrintError.h>
 #import <BRLMPrinterKit/BRLMGetStatusError.h>
-
+#import <BRLMPrinterKit/BRLMPrinterModelSpec.h>
+#import <BRLMPrinterKit/BRLMPrinterSearcher.h>
 #import <BRLMPrinterKit/BRLMPrinterStatus.h>
-
+#import <BRLMPrinterKit/BRLMPrinterSearcher.h>
 #import <BRLMPrinterKit/BRLMPrintSettingsProtocol.h>
 #import <BRLMPrinterKit/BRLMMWPrintSettings.h>
 #import <BRLMPrinterKit/BRLMPJPrintSettings.h>

@@ -167,10 +167,10 @@ class Model implements AModel {
   static final PT_P715eBT = Model._internal2("PT_P715eBT", 69, PT_E550W);
   static final PT_P910BT = Model._internal(
       "PT_P910BT", 68, PT.W36.getId(), PrinterSeries.PT_LABEL_PRINTER);
-  static final RJ_3230B = Model._internal2("RJ_3230B", 70, RJ_4030);
-  // static final RJ_3230B = Model._internal("RJ_3250WB", 70,
-  //     PaperSize.CUSTOM.getPaperId(), PrinterSeries.MOBILE_PRINTER);
-  static final RJ_3250WB = Model._internal2("RJ_3250WB", 71, RJ_4030);
+  static final RJ_3230B = Model._internal2(
+      "RJ_3230B", 70, RJ_4030);
+  static final RJ_3250WB = Model._internal2(
+      "RJ_3250WB", 71, RJ_4030);
   static final PT_D410 = Model._internal(
       "PT_D410", 72, PT.W18.getId(), PrinterSeries.PT_LABEL_PRINTER);
   static final PT_D460BT = Model._internal2("PT_D460BT", 73, PT_D410);
@@ -186,6 +186,7 @@ class Model implements AModel {
   static final TD_2125NWB = Model._internal2("TD_2125NWB", 82, RJ_4030);
   static final TD_2135N = Model._internal2("TD_2135N", 83, RJ_4030);
   static final TD_2135NWB = Model._internal2("TD_2135NWB", 84, RJ_4030);
+
 
   static final UNSUPPORTED = Model._internal("UNSUPPORTED", 255,
       PaperSize.CUSTOM.getPaperId(), PrinterSeries.UNSUPPORTED);
@@ -1569,6 +1570,7 @@ class PrinterInfo {
   CustomPaperInfo? getCustomPaperInfo() {
     return this.customPaperInfo;
   }*/
+
 }
 
 class BatteryTernary {
@@ -1673,8 +1675,7 @@ class PrinterStatus {
   }
 
   static PrinterStatus fromMap(Map<dynamic, dynamic> map) {
-    debugPrint('st/ errorCode=${map['errorCode']}');
-    debugPrint('st/ errorMap=$map');
+    debugPrint('yt/ errorCode=${map['errorCode']}');
 
     return PrinterStatus(
       statusBytes: map["statusBytes"],
@@ -3185,9 +3186,7 @@ class Printer {
       FlutterBluePlus? flutterBlue = FlutterBluePlus();
 
       // Start scanning
-      FlutterBluePlus.startScan(
-          withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")],
-          timeout: Duration(seconds: timeout ~/ 1000));
+      FlutterBluePlus.startScan(withServices: [Guid("A76EB9E0-F3AC-4990-84CF-3A94D2426B2B")], timeout: Duration(seconds: timeout~/1000));
 
       Set<BLEPrinter> foundDevices = {};
       // Listen to scan results

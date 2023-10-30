@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'another_brother'
-  s.version          = '0.0.1'
+  s.version          = '2.1.0'
   s.summary          = 'A flutter plugin project for printing using the Brother printers.'
   s.description      = <<-DESC
 A new flutter plugin project.
@@ -22,14 +22,17 @@ A new flutter plugin project.
   #s.ios.vendored_frameworks = 'Lib/BRLMPrinterKit.framework'
   #s.vendored_frameworks = 'BRLMPrinterKit.framework'
 
-  #s.ios.vendored_frameworks = 'Lib/BRPtouchPrinterKit.framework'
+  # s.ios.vendored_frameworks = 'Lib/BRPtouchPrinterKit.framework'
   #s.vendored_frameworks = 'BRPtouchPrinterKit.framework'
 
-  #s.dependency 'BRLMPrinterKit'
-  s.dependency 'BRLMPrinterKit_AB'
-  s.dependency 'BROTHERSDK'
+  # s.dependency 'BRLMPrinterKit'
+  # s.dependency 'BRLMPrinterKit_AB'
+  # s.dependency 'BROTHERSDK'
 
   #s.dependency 'BRLMPrinterKitBind'
+
+  # 直接ライブラリを読み込む
+  s.ios.vendored_frameworks = 'Lib/BRLMPrinterKit.xcframework'
 
   s.dependency 'Flutter'
   s.platform = :ios, '9.0'

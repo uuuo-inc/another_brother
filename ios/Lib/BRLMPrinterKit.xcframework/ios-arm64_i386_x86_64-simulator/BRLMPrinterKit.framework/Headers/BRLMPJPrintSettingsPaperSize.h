@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, BRLMPJPrintSettingsPaperSizeStandard) {
     BRLMPJPrintSettingsPaperSizeStandardLegal,
     BRLMPJPrintSettingsPaperSizeStandardLetter,
     BRLMPJPrintSettingsPaperSizeStandardA5,
+    BRLMPJPrintSettingsPaperSizeStandardA5_Landscape,
     BRLMPJPrintSettingsPaperSizeStandardCustom, // read only
 };
 

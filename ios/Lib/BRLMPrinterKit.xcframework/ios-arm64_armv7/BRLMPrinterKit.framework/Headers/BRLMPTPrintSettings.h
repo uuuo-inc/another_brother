@@ -22,6 +22,11 @@
         BRLMPTPrintSettingsLabelSizeWidthHS_17_7mm,
         BRLMPTPrintSettingsLabelSizeWidthHS_23_6mm,
         BRLMPTPrintSettingsLabelSizeWidthFL_21x45mm,
+        BRLMPTPrintSettingsLabelSizeWidthHS_5_2mm,
+        BRLMPTPrintSettingsLabelSizeWidthHS_9_0mm,
+        BRLMPTPrintSettingsLabelSizeWidthHS_11_2mm,
+        BRLMPTPrintSettingsLabelSizeWidthHS_21_0mm,
+        BRLMPTPrintSettingsLabelSizeWidthHS_31_0mm,
     };
     
 NS_ASSUME_NONNULL_BEGIN
