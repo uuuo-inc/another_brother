@@ -8,7 +8,7 @@
 #import <BRLMPrinterKit/BRLMError.h>
 
 typedef NS_ENUM(NSInteger, BRLMOpenChannelErrorCode) {
-    BRLMOpenChannelErrorCodeNoError,
+    BRLMOpenChannelErrorCodeNoError = 30000,
     BRLMOpenChannelErrorCodeOpenStreamFailure,
     BRLMOpenChannelErrorCodeTimeout,
 };

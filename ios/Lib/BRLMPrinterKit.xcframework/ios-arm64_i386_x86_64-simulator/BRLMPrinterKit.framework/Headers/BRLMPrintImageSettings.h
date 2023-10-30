@@ -39,6 +39,12 @@ typedef NS_ENUM(NSInteger, BRLMPrintSettingsResolution) {
     BRLMPrintSettingsResolutionNormal,
     BRLMPrintSettingsResolutionHigh,
 };
+typedef NS_ENUM(NSInteger, BRLMPrintSettingsRotation) {
+    BRLMPrintSettingsRotationRotate0,
+    BRLMPrintSettingsRotationRotate90,
+    BRLMPrintSettingsRotationRotate180,
+    BRLMPrintSettingsRotationRotate270,
+};
 typedef NS_ENUM(NSInteger, BRLMPrintSettingsScaleMode) {
     BRLMPrintSettingsScaleModeActualSize,
     BRLMPrintSettingsScaleModeFitPageAspect,
@@ -57,6 +63,7 @@ typedef NS_ENUM(NSInteger, BRLMPrintSettingsVerticalAlignment) {
 @property (nonatomic) BRLMPrintSettingsScaleMode scaleMode;
 @property (nonatomic) CGFloat scaleValue;
 @property (nonatomic) BRLMPrintSettingsOrientation printOrientation;
+@property (nonatomic) BRLMPrintSettingsRotation imageRotation;
 @property (nonatomic) BRLMPrintSettingsHalftone halftone;
 @property (nonatomic) BRLMPrintSettingsHorizontalAlignment hAlignment;
 @property (nonatomic) BRLMPrintSettingsVerticalAlignment vAlignment;

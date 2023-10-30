@@ -19,6 +19,11 @@
 #define ORI_LANDSCAPE       0x00
 #define ORI_PORTRATE        0x01
 
+static const int ROTATE_0 = 0x00;
+static const int ROTATE_90 = 0x01;
+static const int ROTATE_180 = 0x02;
+static const int ROTATE_270 = 0x03;
+
 //  Image processing Setting
 #define HALFTONE_BINARY     0x00
 #define HALFTONE_DITHER     0x01
@@ -102,6 +107,7 @@
 @property    (assign,nonatomic)double   scaleValue;
 @property    (assign,nonatomic)int      nDensity;
 @property    (assign,nonatomic)int      nOrientation;
+@property    (assign,nonatomic)int      nRotation;
 @property    (assign,nonatomic)int      nHalftone;
 @property    (assign,nonatomic)int      nHalftoneBinaryThreshold;
 @property    (assign,nonatomic)int      nHorizontalAlign;

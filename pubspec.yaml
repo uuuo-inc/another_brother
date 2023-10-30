@@ -45,6 +45,8 @@ flutter:
     - custom_paper/CustomRJ3050Paper/
     - custom_paper/CustomRJ3150AiPaper/
     - custom_paper/CustomRJ3150Paper/
+    - custom_paper/CustomRJ3230BPaper/
+    - custom_paper/CustomRJ3250WBPaper/
     - custom_paper/CustomRJ4030AiPaper/
     - custom_paper/CustomRJ4040Paper/
     - custom_paper/CustomRJ4230Paper/
