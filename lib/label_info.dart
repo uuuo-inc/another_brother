@@ -24,28 +24,28 @@ class LabelInfo {
 
   static LabelInfo fromMap(Map<dynamic, dynamic> map) {
     return LabelInfo(
-      labelNameIndex: map["labelNameIndex"],
-      isAutoCut: map["isAutoCut"],
-      isEndCut: map["isEndCut"],
-      isHalfCut: map["isHalfCut"],
-      isSpecialTape: map["isSpecialTape"],
-      isCutMark: map["isCutMark"],
-      labelColor: LabelColor.fromMap(map["labelColor"]),
-      labelFontColor: LabelColor.fromMap(map["labelFontColor"]),
-      labelType: map["labelType"],
+      labelNameIndex: map["labelNameIndex"] as int,
+      isAutoCut: map["isAutoCut"] as bool,
+      isEndCut: map["isEndCut"] as bool,
+      isHalfCut: map["isHalfCut"] as bool,
+      isSpecialTape: map["isSpecialTape"] as bool,
+      isCutMark: map["isCutMark"] as bool,
+      labelColor: LabelColor.fromMap(map["labelColor"] as Map) as LabelColor,
+      labelFontColor:
+          LabelColor.fromMap(map["labelFontColor"] as Map) as LabelColor,
+      labelType: map["labelType"] as int,
     );
   }
-
 
   Map<String, dynamic> toMap() {
     return {
       "labelNameIndex": labelNameIndex,
       "isAutoCut": isAutoCut,
-      "isEndCut" : isEndCut,
-      "isHalfCut" : isHalfCut,
-      "isSpecialTape" : isSpecialTape,
-      "isCutMark" : isCutMark,
-      "labelColor" : labelColor.toMap(),
+      "isEndCut": isEndCut,
+      "isHalfCut": isHalfCut,
+      "isSpecialTape": isSpecialTape,
+      "isCutMark": isCutMark,
+      "labelColor": labelColor.toMap(),
       "labelFontColor": labelFontColor.toMap(),
       "labelType": labelType
     };
@@ -82,10 +82,14 @@ class LabelColor {
   static const CLEAR_WHITE = const LabelColor._internal(9, "CLEAR_WHITE");
   static const GOLD = const LabelColor._internal(10, "GOLD");
   static const GOLD_PREMIUM = const LabelColor._internal(11, "GOLD_PREMIUM");
-  static const SILVER_PREMIUM = const LabelColor._internal(12, "SILVER_PREMIUM");
-  static const OTHERS_PREMIUM = const LabelColor._internal(13, "OTHERS_PREMIUM");
-  static const OTHERS_MASKING = const LabelColor._internal(14, "OTHERS_MASKING");
-  static const LIGHTBLUE_SATIN = const LabelColor._internal(15, "LIGHTBLUE_SATIN");
+  static const SILVER_PREMIUM =
+      const LabelColor._internal(12, "SILVER_PREMIUM");
+  static const OTHERS_PREMIUM =
+      const LabelColor._internal(13, "OTHERS_PREMIUM");
+  static const OTHERS_MASKING =
+      const LabelColor._internal(14, "OTHERS_MASKING");
+  static const LIGHTBLUE_SATIN =
+      const LabelColor._internal(15, "LIGHTBLUE_SATIN");
   static const MINT_SATIN = const LabelColor._internal(16, "MINT_SATIN");
   static const SILVER_SATIN = const LabelColor._internal(17, "SILVER_SATIN");
   static const MATTE_WHITE = const LabelColor._internal(32, "MATTE_WHITE");
@@ -95,8 +99,10 @@ class LabelColor {
   static const SATIN_SILVER = const LabelColor._internal(36, "SATIN_SILVER");
   static const BLUE_WHITE = const LabelColor._internal(48, "BLUE_WHITE");
   static const RED_WHITE = const LabelColor._internal(49, "RED_WHITE");
-  static const FLUORESCENT_ORANGE = const LabelColor._internal(64, "FLUORESCENT_ORANGE");
-  static const FLUORESCENT_YELLOW = const LabelColor._internal(65, "FLUORESCENT_YELLOW");
+  static const FLUORESCENT_ORANGE =
+      const LabelColor._internal(64, "FLUORESCENT_ORANGE");
+  static const FLUORESCENT_YELLOW =
+      const LabelColor._internal(65, "FLUORESCENT_YELLOW");
   static const BERRY_PINK = const LabelColor._internal(80, "BERRY_PINK");
   static const LIGHT_GRAY = const LabelColor._internal(81, "LIGHT_GRAY");
   static const LIME_GREEN = const LabelColor._internal(82, "LIME_GREEN");
@@ -105,8 +111,10 @@ class LabelColor {
   static const FABRIC_BLUE = const LabelColor._internal(98, "FABRIC_BLUE");
   static const TUBE_WHITE = const LabelColor._internal(112, "TUBE_WHITE");
   static const SELF_WHITE = const LabelColor._internal(128, "SELF_WHITE");
-  static const FLEXIBLE_WHITE = const LabelColor._internal(144, "FLEXIBLE_WHITE");
-  static const FLEXIBLE_YELLOW = const LabelColor._internal(145, "FLEXIBLE_YELLOW");
+  static const FLEXIBLE_WHITE =
+      const LabelColor._internal(144, "FLEXIBLE_WHITE");
+  static const FLEXIBLE_YELLOW =
+      const LabelColor._internal(145, "FLEXIBLE_YELLOW");
   static const CLEANING = const LabelColor._internal(240, "CLEANING");
   static const STENCIL = const LabelColor._internal(241, "STENCIL");
   static const PASTEL_PURPLE = const LabelColor._internal(37, "PASTEL_PURPLE");
@@ -167,7 +175,7 @@ class LabelColor {
     return _name;
   }
 
-  static int getItemId(index) {
+  static int getItemId(int index) {
     if (index < 0 || index > _values.length) {
       return UNSUPPORT.getId();
     }
@@ -196,16 +204,12 @@ class LabelColor {
   }
 
   static LabelColor fromMap(Map<dynamic, dynamic> map) {
-    int id = map["id"];
-    String name = map["name"];
+    String name = map["name"] as String;
     return LabelColor.valueFromName(name);
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      "id": _id,
-      "name": _name
-    };
+    return {"id": _id, "name": _name};
   }
 
   static List<LabelColor> getValues() => List.from(_values);
@@ -219,8 +223,8 @@ class LabelColor {
 abstract class ALabelName {
   Map<String, dynamic> toMap();
   String getName();
-
 }
+
 class PT3 implements ALabelName {
   final int _id;
   final String _name;
@@ -240,7 +244,7 @@ class PT3 implements ALabelName {
     return _id;
   }
 
-  static int getItemId(index) {
+  static int getItemId(int index) {
     if (index < 0 || index > _values.length) {
       return UNSUPPORT.getId();
     }
@@ -269,22 +273,19 @@ class PT3 implements ALabelName {
   }
 
   static PT3 fromMap(Map<dynamic, dynamic> map) {
-    int id = map["id"];
+    int id = map["id"] as int;
     return PT3.valueFromID(id);
   }
 
-  static PT3 fromIndex (int index) {
-    if (index < 0 ||index >= _values.length ) {
+  static PT3 fromIndex(int index) {
+    if (index < 0 || index >= _values.length) {
       return UNSUPPORT;
     }
     return _values[index];
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": _id,
-      "name": _name,
-      "model": _model
-    };
+    return {"id": _id, "name": _name, "model": _model};
   }
 
   static List<PT3> getValues() {
@@ -357,7 +358,7 @@ class PT implements ALabelName {
     return _name;
   }
 
-  static int getItemId(index) {
+  static int getItemId(int index) {
     if (index < 0 || index > _values.length) {
       return UNSUPPORT.getId();
     }
@@ -386,22 +387,19 @@ class PT implements ALabelName {
   }
 
   static PT fromMap(Map<dynamic, dynamic> map) {
-    int id = map["id"];
+    int id = map["id"] as int;
     return PT.valueFromID(id);
   }
 
-  static PT fromIndex (int index) {
-    if (index < 0 ||index >= _values.length ) {
+  static PT fromIndex(int index) {
+    if (index < 0 || index >= _values.length) {
       return UNSUPPORT;
     }
     return _values[index];
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": _id,
-      "name": _name,
-      "model": _model
-    };
+    return {"id": _id, "name": _name, "model": _model};
   }
 
   static List<PT> getValues() {
@@ -469,7 +467,7 @@ class QL700 implements ALabelName {
     return _name;
   }
 
-  static int getItemId(index) {
+  static int getItemId(int index) {
     if (index < 0 || index > _values.length) {
       return UNSUPPORT.getId();
     }
@@ -500,22 +498,19 @@ class QL700 implements ALabelName {
   }
 
   static QL700 fromMap(Map<dynamic, dynamic> map) {
-    int id = map["id"];
+    int id = map["id"] as int;
     return QL700.valueFromID(id);
   }
 
-  static QL700 fromIndex (int index) {
-    if (index < 0 ||index >= _values.length ) {
+  static QL700 fromIndex(int index) {
+    if (index < 0 || index >= _values.length) {
       return UNSUPPORT;
     }
     return _values[index];
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": _id,
-      "name": _name,
-      "model": _model
-    };
+    return {"id": _id, "name": _name, "model": _model};
   }
 }
 
@@ -593,7 +588,7 @@ class QL1115 implements ALabelName {
 
   static List<QL1115> getValues() => List.from(_values);
 
-  static int getItemId(index) {
+  static int getItemId(int index) {
     if (index < 0 || index > _values.length) {
       return UNSUPPORT.getId();
     }
@@ -622,19 +617,16 @@ class QL1115 implements ALabelName {
   }
 
   static QL1115 fromMap(Map<dynamic, dynamic> map) {
-    int id = map["id"];
+    int id = map["id"] as int;
     return QL1115.valueFromID(id);
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": _id,
-    "name": _name,
-      "model": _model
-    };
+    return {"id": _id, "name": _name, "model": _model};
   }
 
-  static QL1115 fromIndex (int index) {
-    if (index < 0 ||index >= _values.length ) {
+  static QL1115 fromIndex(int index) {
+    if (index < 0 || index >= _values.length) {
       return UNSUPPORT;
     }
 
@@ -643,7 +635,7 @@ class QL1115 implements ALabelName {
 }
 
 class QL1100 implements ALabelName {
-  final _id;
+  final int _id;
   final String _name;
   static const String _model = "QL1100";
 
@@ -700,7 +692,7 @@ class QL1100 implements ALabelName {
   ];
 
   int getId() {
-    return _id;
+    return _id as int;
   }
 
   @override
@@ -710,7 +702,7 @@ class QL1100 implements ALabelName {
 
   static List<QL1100> getValues() => List.from(_values);
 
-  static int getItemId(index) {
+  static int getItemId(int index) {
     if (index < 0 || index > _values.length) {
       return UNSUPPORT.getId();
     }
@@ -739,12 +731,12 @@ class QL1100 implements ALabelName {
   }
 
   static QL1100 fromMap(Map<dynamic, dynamic> map) {
-    int id = map["id"];
+    int id = map["id"] as int;
     return QL1100.valueFromID(id);
   }
 
-  static QL1100 fromIndex (int index) {
-    if (index < 0 ||index >= _values.length ) {
+  static QL1100 fromIndex(int index) {
+    if (index < 0 || index >= _values.length) {
       return UNSUPPORT;
     }
 
@@ -752,9 +744,6 @@ class QL1100 implements ALabelName {
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": _id,
-      "name": _name,
-      "model": _model
-    };
+    return {"id": _id, "name": _name, "model": _model};
   }
 }
