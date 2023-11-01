@@ -34,7 +34,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace "com.rouninlabs.another_brother"
     compileSdkVersion 33
 
     sourceSets {
