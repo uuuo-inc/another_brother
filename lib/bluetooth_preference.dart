@@ -36,7 +36,7 @@ class AuthMode {
   }
 
   static AuthMode fromMap(Map<dynamic, dynamic> map) {
-    int id = map["command"];
+    final id = map["command"] as int;
     return AuthMode.getAuthMode(id);
   }
 
@@ -75,7 +75,7 @@ class SSP {
   }
 
   static SSP fromMap(Map<dynamic, dynamic> map) {
-    int id = map["command"];
+    final id = map["command"] as int;
     return SSP.getSsp(id);
   }
 
@@ -126,14 +126,13 @@ class PowerSaveMode {
   }
 
   static PowerSaveMode fromMap(Map<dynamic, dynamic> map) {
-    int id = map["command"];
+    final id = map["command"] as int;
     return PowerSaveMode.getPowerSaveMode(id);
   }
 
   Map<String, dynamic> toMap() {
     return {"command": this._command};
   }
-
 }
 
 class BluetoothPreference {
@@ -141,25 +140,23 @@ class BluetoothPreference {
   PowerSaveMode powerMode;
   AuthMode authMode;
 
-  BluetoothPreference({this.enableSsp = SSP.NOCHANGE,
-    this.powerMode = PowerSaveMode.NOCHANGE,
-    this.authMode = AuthMode.AUTH_NO_ENC_NO});
+  BluetoothPreference(
+      {this.enableSsp = SSP.NOCHANGE,
+      this.powerMode = PowerSaveMode.NOCHANGE,
+      this.authMode = AuthMode.AUTH_NO_ENC_NO});
 
   static BluetoothPreference fromMap(Map<dynamic, dynamic> map) {
     return BluetoothPreference(
-      enableSsp: SSP.fromMap(map["enableSsp"]),
-        powerMode: PowerSaveMode.fromMap(map["powerMode"]),
-        authMode: AuthMode.fromMap(map["authMode"])
-    );
+        enableSsp: SSP.fromMap(map['enableSsp'] as Map),
+        powerMode: PowerSaveMode.fromMap(map["powerMode"] as Map),
+        authMode: AuthMode.fromMap(map["authMode"] as Map));
   }
 
   Map<String, dynamic> toMap() {
-    return
-      {
-        "enableSsp": enableSsp.toMap(),
+    return {
+      "enableSsp": enableSsp.toMap(),
       "powerMode": powerMode.toMap(),
-        "authMode": authMode.toMap()
-      };
+      "authMode": authMode.toMap()
+    };
   }
-
 }

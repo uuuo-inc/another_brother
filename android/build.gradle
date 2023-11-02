@@ -1,20 +1,17 @@
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
-
 group 'com.rouninlabs.another_brother'
 version '1.0-SNAPSHOT'
 
-String localMavenPath = project.mkdir("build").absolutePath
-
 buildscript {
-    ext.kotlin_version = '1.7.20'
+    ext.kotlin_version = '1.7.10'
     repositories {
         google()
         mavenCentral()
+        //jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:7.3.0'
+        //classpath 'com.android.tools.build:gradle:3.5.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -25,7 +22,7 @@ rootProject.allprojects {
         mavenCentral()
         //jcenter()
         maven {
-            url "file://$localMavenPath"
+            url "https://rouninlabs.jfrog.io/artifactory/rounin-libs-external/"
         }
     }
 }
@@ -41,7 +38,7 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 23
+        minSdkVersion 19 // Bumped up because of Type B SDK
         consumerProguardFiles 'consumer-rules.pro'
     }
 }
