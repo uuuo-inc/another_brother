@@ -47,6 +47,8 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.brother.sdk:printer:4.6.4'
+    implementation 'com.brother.typeb:print:1.0.0'
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
@@ -60,49 +62,49 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 
 // https://pub.dev/packages/flutter_aar
 
-String aarPath = localMavenPath
-task useAar {
-    File file = project.file("libs")
-    if (file.exists() && file.isDirectory()) {
-        file.listFiles(new FileFilter() {
-            @Override
-            boolean accept(File pathname) {
-                return pathname.name.endsWith(".aar")
-            }
-        }).each { item ->
-            String aarName = item.name.substring(0, item.name.length() - 4)
-            String[] aarInfo = aarName.split("-")
-            String sha1 = getFileSha1(item)
-            String md5 = getFileMD5(item)
-            println("aar: " + aarInfo + " file sha1:" + sha1 + " md5:" + md5)
-            String fromStr = item.path
-            String intoStr = aarPath + "/" + aarInfo[0].replace(".", "/") + "/" + aarInfo[1] + "/" + aarInfo[2]
-            String newName = aarInfo[1] + "-" + aarInfo[2] + ".aar"
+// String aarPath = localMavenPath
+// task useAar {
+//     File file = project.file("libs")
+//     if (file.exists() && file.isDirectory()) {
+//         file.listFiles(new FileFilter() {
+//             @Override
+//             boolean accept(File pathname) {
+//                 return pathname.name.endsWith(".aar")
+//             }
+//         }).each { item ->
+//             String aarName = item.name.substring(0, item.name.length() - 4)
+//             String[] aarInfo = aarName.split("-")
+//             String sha1 = getFileSha1(item)
+//             String md5 = getFileMD5(item)
+//             println("aar: " + aarInfo + " file sha1:" + sha1 + " md5:" + md5)
+//             String fromStr = item.path
+//             String intoStr = aarPath + "/" + aarInfo[0].replace(".", "/") + "/" + aarInfo[1] + "/" + aarInfo[2]
+//             String newName = aarInfo[1] + "-" + aarInfo[2] + ".aar"
 
-            project.copy {
-                from fromStr
-                into intoStr
-                rename(item.name, newName)
-            }
+//             project.copy {
+//                 from fromStr
+//                 into intoStr
+//                 rename(item.name, newName)
+//             }
 
-            project.file(intoStr + "/" + newName + ".md5").write(md5)
-            project.file(intoStr + "/" + newName + ".sha1").write(sha1)
+//             project.file(intoStr + "/" + newName + ".md5").write(md5)
+//             project.file(intoStr + "/" + newName + ".sha1").write(sha1)
 
-            String pomPath = intoStr + "/" + newName.substring(0, newName.length() - 4) + ".pom"
-            project.file(pomPath).write(createPomStr(aarInfo[0], aarInfo[1], aarInfo[2]))
-            project.file(pomPath + ".md5").write(getFileMD5(project.file(pomPath)))
-            project.file(pomPath + ".sha1").write(getFileSha1(project.file(pomPath)))
+//             String pomPath = intoStr + "/" + newName.substring(0, newName.length() - 4) + ".pom"
+//             project.file(pomPath).write(createPomStr(aarInfo[0], aarInfo[1], aarInfo[2]))
+//             project.file(pomPath + ".md5").write(getFileMD5(project.file(pomPath)))
+//             project.file(pomPath + ".sha1").write(getFileSha1(project.file(pomPath)))
 
-            String metadataPath = project.file(intoStr).getParentFile().path + "/maven-metadata.xml"
-            project.file(metadataPath).write(createMetadataStr(aarInfo[0], aarInfo[1], aarInfo[2]))
-            project.file(metadataPath + ".md5").write(getFileMD5(project.file(metadataPath)))
-            project.file(metadataPath + ".sha1").write(getFileSha1(project.file(metadataPath)))
-            dependencies {
-                implementation "${aarInfo[0]}:${aarInfo[1]}:${aarInfo[2]}"
-            }
-        }
-    }
-}
+//             String metadataPath = project.file(intoStr).getParentFile().path + "/maven-metadata.xml"
+//             project.file(metadataPath).write(createMetadataStr(aarInfo[0], aarInfo[1], aarInfo[2]))
+//             project.file(metadataPath + ".md5").write(getFileMD5(project.file(metadataPath)))
+//             project.file(metadataPath + ".sha1").write(getFileSha1(project.file(metadataPath)))
+//             dependencies {
+//                 implementation "${aarInfo[0]}:${aarInfo[1]}:${aarInfo[2]}"
+//             }
+//         }
+//     }
+// }
 
 public static String createMetadataStr(String groupId, String artifactId, String version) {
     return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
