@@ -48,8 +48,8 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.brother.sdk:printer:4.6.1'
-    implementation 'com.brother.typeb:print:1.0.0'
+    // implementation 'com.brother.sdk:printer:4.6.1'
+    // implementation 'com.brother.typeb:print:1.0.0'
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
