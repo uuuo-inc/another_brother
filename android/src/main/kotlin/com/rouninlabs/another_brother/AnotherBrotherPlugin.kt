@@ -2,6 +2,7 @@ package com.rouninlabs.another_brother
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import androidx.annotation.NonNull
 import com.rouninlabs.another_brother.method.*
 import com.rouninlabs.another_brother.method.typeb.*
@@ -29,6 +30,8 @@ class AnotherBrotherPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+        // ログを出力
+        Log.e("another-brother", "onMethodCall: ${call.method}")
         if (call.method == "getPlatformVersion") {
             result.success("Android ${Build.VERSION.RELEASE}")
         } else if (call.method == V4PrintImageMethodCall.METHOD_NAME) {

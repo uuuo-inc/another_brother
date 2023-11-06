@@ -3,10 +3,13 @@ package com.rouninlabs.another_brother.method
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.util.Log
+import com.brother.ptouch.sdk.printdemo.model.BluetoothPrinterInfo
+import com.brother.ptouch.sdk.printdemo.model.PrinterConnectUtil
 import com.brother.sdk.lmprinter.Channel
 import com.brother.sdk.lmprinter.OpenChannelError
 import com.brother.sdk.lmprinter.PrintError.ErrorCode
 import com.brother.sdk.lmprinter.PrinterDriverGenerator
+import com.brother.sdk.lmprinter.PrinterDriverGenerateResult
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -43,34 +46,56 @@ class PrintFileListMethodCall(
                 // Decoded Printer Info
                 val printSettings = v4PrintSettingsFromMap(context = context, map = dartPrintInfo)
 
-                val channel = Channel.newBluetoothChannel(
+                // val channel = Channel.newBluetoothChannel(
+                //     dartPrintInfo["macAddress"] as String,
+                //     BluetoothAdapter.getDefaultAdapter(),
+                // )
+                // val channel =
+                // PrinterConnectUtil.getCurrentChannel(context, dartPrintInfo) ?: return context.getString((R.string.create_channel_error))
+                Log.e("another-brother", "create channel")
+                // Log.e("another-brother", dartPrintInfo["printerModel"] as String)
+                val info = BluetoothPrinterInfo(
+                    "TD_4550DNWB",
                     dartPrintInfo["macAddress"] as String,
-                    BluetoothAdapter.getDefaultAdapter(),
                 )
-                val generatorResult = PrinterDriverGenerator.openChannel(channel)
+                val channel = PrinterConnectUtil.getCurrentChannel(context, info)
+                Log.e("another-brother", "openChannel");
+                Log.e("another-brother", dartPrintInfo["macAddress"] as String)
+                Log.e("another-brother", channel.toString())
+                val result: PrinterDriverGenerateResult = PrinterDriverGenerator.openChannel(channel);
 
-                if (generatorResult.error.code != OpenChannelError.ErrorCode.NoError) {
-                    // There was an error notify
-                    withContext(Dispatchers.Main) {
-                        // Set result Printer status.
-                        result.success(
-                            v4PrinterStatusMap(
-                                // error = when (generatorResult.error.code) {
-                                //     OpenChannelError.ErrorCode.NoError -> ErrorCode.NoError
-                                //     OpenChannelError.ErrorCode.OpenStreamFailure -> ErrorCode.ChannelErrorStreamStatusError
-                                //     OpenChannelError.ErrorCode.Timeout -> ErrorCode.ChannelTimeout
-                                //     else -> ErrorCode.UnknownError
-                                // },
-                                // errorの場合はerror codeをログに出力
-                                error = ErrorCode.UnknownError,
+                // val generatorResult = PrinterDriverGenerator.openChannel(channel)
 
-                            ),
-                        )
-                    }
-                    return@launch
+                // Log.e("another-brother", generatorResult. );
+                // Log.e("another-brother", generatorResult.error.code.toString());
+                // if (generatorResult.error.code != OpenChannelError.ErrorCzrode.NoError) {
+                //     // There was an error notify
+                //     withContext(Dispatchers.Main) {
+                //         // Set result Printer status.
+                //         result.success(
+                //             v4PrinterStatusMap(
+                //                 // error = when (generatorResult.error.code) {
+                //                 //     OpenChannelError.ErrorCode.NoError -> ErrorCode.NoError
+                //                 //     OpenChannelError.ErrorCode.OpenStreamFailure -> ErrorCode.ChannelErrorStreamStatusError
+                //                 //     OpenChannelError.ErrorCode.Timeout -> ErrorCode.ChannelTimeout
+                //                 //     else -> ErrorCode.UnknownError
+                //                 // },
+                //                 // errorの場合はerror codeをログに出力
+                //                 error = ErrorCode.UnknownError,
+
+                //             ),
+                //         )
+                //     }
+                //     return@launch
+                // }
+                if (result.getError().getCode() != OpenChannelError.ErrorCode.NoError) {
+                    Log.e("", "Error - Open Channel: " + result.getError().getCode());
+                    return@launch;
                 }
+                Log.e("another-brother", "generate channel success");
 
-                val driver = generatorResult.driver
+                // val driver = generatorResult.driver
+                val driver = result.getDriver();
                 val error =
                     try {
                         driver.printImage(filePathList.toTypedArray(), printSettings).code
@@ -81,13 +106,13 @@ class PrintFileListMethodCall(
 
                 driver.closeChannel()
 
-                withContext(Dispatchers.Main) {
-                    result.success(v4PrinterStatusMap(error))
-                }
+                // withContext(Dispatchers.Main) {
+                //     result.success(v4PrinterStatusMap(error))
+                // }
             } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    result.success(v4PrinterStatusMap(ErrorCode.UnknownError))
-                }
+                // withContext(Dispatchers.Main) {
+                //     result.success(v4PrinterStatusMap(ErrorCode.UnknownError))
+                // }
             } finally {
 
             }
