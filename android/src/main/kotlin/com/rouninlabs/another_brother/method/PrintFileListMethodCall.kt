@@ -55,12 +55,15 @@ class PrintFileListMethodCall(
                         // Set result Printer status.
                         result.success(
                             v4PrinterStatusMap(
-                                error = when (generatorResult.error.code) {
-                                    OpenChannelError.ErrorCode.NoError -> ErrorCode.NoError
-                                    OpenChannelError.ErrorCode.OpenStreamFailure -> ErrorCode.ChannelErrorStreamStatusError
-                                    OpenChannelError.ErrorCode.Timeout -> ErrorCode.ChannelTimeout
-                                    else -> ErrorCode.UnknownError
-                                },
+                                // error = when (generatorResult.error.code) {
+                                //     OpenChannelError.ErrorCode.NoError -> ErrorCode.NoError
+                                //     OpenChannelError.ErrorCode.OpenStreamFailure -> ErrorCode.ChannelErrorStreamStatusError
+                                //     OpenChannelError.ErrorCode.Timeout -> ErrorCode.ChannelTimeout
+                                //     else -> ErrorCode.UnknownError
+                                // },
+                                // errorの場合はerror codeをログに出力
+                                error = ErrorCode.UnknownError,
+
                             ),
                         )
                     }
