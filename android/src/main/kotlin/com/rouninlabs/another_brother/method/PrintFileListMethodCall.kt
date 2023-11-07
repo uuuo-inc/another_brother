@@ -59,7 +59,7 @@ class PrintFileListMethodCall(
                                     OpenChannelError.ErrorCode.NoError -> ErrorCode.NoError
                                     OpenChannelError.ErrorCode.OpenStreamFailure -> ErrorCode.ChannelErrorStreamStatusError
                                     OpenChannelError.ErrorCode.Timeout -> ErrorCode.ChannelTimeout
-                                    null -> ErrorCode.UnknownError
+                                    else -> ErrorCode.UnknownError
                                 },
                             ),
                         )
